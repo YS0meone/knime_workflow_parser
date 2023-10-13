@@ -36,13 +36,19 @@ def remove_pattern(input_str):
 def main():
     # parse xml
     kn_dict = read_xml(XML_FILE_PATH)
+    tx_dict = workflow_temp.copy()
     # pprint(kn_dict)
     kn_ops = kn_dict[2]["config"]
     # pprint(kn_ops)
     for op in kn_ops:
-        op_type = op['entry'][1]['@value']
-        print(remove_pattern(op_type))
-        
+        op_type = remove_pattern(op['entry'][1]['@value'])
+        og = OperatorGenerator(op_type, op)
+        tx_dict["operators"].append(og.get_temp())
+    get_output(CURRENT_OUTPUT, tx_dict)
+    
+        # tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
+
+
     # tx_dict = workflow_temp.copy()
     # get_output(JSON_FILE_PATH, rm_dict)
 
