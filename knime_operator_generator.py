@@ -126,5 +126,5 @@ class OperatorGenerator():
         return self.temp["operatorID"]
     
     def generate_pos(self):
-        return {"x": float(self.input["@x"]), "y": float(self.input["@y"])}
+        return {"x": float(self.input["config"]["config"]["entry"][1]["@value"]), "y": float(self.input["config"]["config"]["entry"][2]["@value"])}
     

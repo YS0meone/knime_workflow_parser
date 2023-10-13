@@ -43,7 +43,9 @@ def main():
     for op in kn_ops:
         op_type = remove_pattern(op['entry'][1]['@value'])
         og = OperatorGenerator(op_type, op)
+        # pprint(op)
         tx_dict["operators"].append(og.get_temp())
+        tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
     get_output(CURRENT_OUTPUT, tx_dict)
     
         # tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
