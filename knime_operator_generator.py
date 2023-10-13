@@ -114,6 +114,8 @@ class OperatorGenerator():
         input_port["portID"] = "input-0"
         output_port = self.port_temp.copy()
         output_port["portID"] = "output-0"
+        self.temp["inputPorts"].append(input_port)
+        self.temp["outputPorts"].append(output_port)
 
     
     def get_temp(self):
