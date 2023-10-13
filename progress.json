@@ -1,0 +1,62 @@
+{
+    "operators": [
+        {
+            "operatorID": "CSVFileScan-operator-1dd50481-c6bf-4f37-88f8-a341a6dbf035",
+            "operatorType": "CSVFileScan",
+            "operatorVersion": "c14deb143ea86b24f718654c929cfd618cbd4503",
+            "operatorProperties": {
+                "dumProp": [],
+                "fileEncoding": "UTF_8",
+                "customDelimiter": ",",
+                "hasHeader": true,
+                "fileName": "",
+                "limit": null,
+                "offset": null
+            },
+            "inputPorts": [],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "CSVFileScan",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        {
+            "operatorID": "Aggregate-operator-61c4e950-d878-4add-924f-dd3879e4698b",
+            "operatorType": "Aggregate",
+            "operatorVersion": "73d2ca7026c93ca7898b3e9c0ce148b99bbf2726",
+            "operatorProperties": {
+                "dumProp": [],
+                "aggregations": [
+                    {
+                        "result attribute": "",
+                        "aggFunction": "",
+                        "attribute": ""
+                    }
+                ],
+                "groupByKeys": [
+                    ""
+                ]
+            },
+            "inputPorts": [],
+            "outputPorts": [],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Aggregate",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        }
+    ],
+    "operatorPositions": {},
+    "links": [],
+    "groups": [],
+    "breakpoints": {},
+    "commentBoxes": []
+}
