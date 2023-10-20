@@ -62,7 +62,7 @@ class OperatorGenerator():
             if param["@key"] == "select_subset":
                 attrs = param["@value"].split(",")
                 for attr in attrs:
-                    attributes.append({"alias": "", "originalAttribute": attr})
+                    attributes.append({"alias": "", "originalAttgitribute": attr})
         input_port = self.port_temp.copy()
         input_port["portID"] = "input-0"
         output_port = self.port_temp.copy()
