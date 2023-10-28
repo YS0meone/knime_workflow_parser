@@ -1,0 +1,114 @@
+{
+    "CSV Reader": {
+        "operatorID": "CSVFileScan-operator-c035ea26-88cd-435e-82db-e27564bcb521",
+        "operatorType": "CSVFileScan",
+        "operatorVersion": "902480181191c918a82302e7aee730ea35fae081",
+        "operatorProperties": {
+            "fileEncoding": "UTF_8",
+            "customDelimiter": ",",
+            "hasHeader": true,
+            "dumProp": [],
+            "fileName": null,
+            "limit": null,
+            "offset": null
+        },
+        "inputPorts": [],
+        "outputPorts": [
+            {
+                "portID": "output-0",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": false
+            }
+        ],
+        "showAdvanced": false,
+        "isDisabled": false,
+        "customDisplayName": "CSV File Scan",
+        "dynamicInputPorts": false,
+        "dynamicOutputPorts": false
+    },
+    "Row Aggregator": {
+        "operatorID": "Aggregate-operator-bf321a10-adaa-4aac-a863-f43ec9171a6a",
+        "operatorType": "Aggregate",
+        "operatorVersion": "73d2ca7026c93ca7898b3e9c0ce148b99bbf2726",
+        "operatorProperties": {},
+        "inputPorts": [
+            {
+                "portID": "input-0",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": false
+            }
+        ],
+        "outputPorts": [
+            {
+                "portID": "output-0",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": false
+            }
+        ],
+        "showAdvanced": false,
+        "isDisabled": false,
+        "customDisplayName": "Aggregate",
+        "dynamicInputPorts": false,
+        "dynamicOutputPorts": false
+    },
+    "Dummy": {
+        "operatorID": "Dummy-operator-4d7383c5-9d99-44d3-88f0-0e2672628ab7",
+        "operatorType": "Dummy",
+        "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+        "operatorProperties": {
+            "desc": "",
+            "dumProp": [
+                {
+                    "dummyAttribute": "source",
+                    "dummyValue": "blah"
+                }
+            ]
+        },
+        "inputPorts": [
+            {
+                "portID": "input-0",
+                "displayName": "",
+                "allowMultiInputs": true,
+                "isDynamicPort": false
+            },
+            {
+                "portID": "input-1",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": true
+            },
+            {
+                "portID": "input-2",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": true
+            }
+        ],
+        "outputPorts": [
+            {
+                "portID": "output-0",
+                "displayName": "",
+                "allowMultiInputs": false,
+                "isDynamicPort": false
+            },
+            {
+                "portID": "output-1",
+                "displayName": "",
+                "isDynamicPort": true
+            },
+            {
+                "portID": "output-2",
+                "displayName": "",
+                "isDynamicPort": true
+            }
+        ],
+        "showAdvanced": false,
+        "isDisabled": false,
+        "customDisplayName": "Dummy",
+        "dynamicInputPorts": true,
+        "dynamicOutputPorts": true
+    }
+}
