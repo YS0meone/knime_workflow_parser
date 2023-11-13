@@ -1,0 +1,949 @@
+{
+    "operators": [
+        {
+            "operatorID": "Dummy-operator-c06dfb87-60ac-4b9b-96d0-1314a783e753",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Excel Reader",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Table Splitter",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-47cce22c-8d43-42ee-ad59-27cc3b75d54d",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Cell Extractor",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-7534b9f5-2739-4d1c-bb42-6d4b9996ba24",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Row to Column Header",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-247e1230-ea2d-46b8-93e6-61fd32aefba7",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Cell Updater",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-de63e731-9c13-411d-9e7c-ebcc4129b66e",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Row Filter",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-1e68754f-3ec0-4862-be44-fa3830f6ef05",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Column Filter",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Aggregate-operator-b931f5f0-6c48-4e54-99c6-53dd5996148e",
+            "operatorType": "Aggregate",
+            "operatorVersion": "2ac2c985e8db60fa2c0450b9ddcf5fc4cc52ff02",
+            "operatorProperties": {
+                "aggregations": [
+                    {
+                        "attribute": "",
+                        "result attribute": "",
+                        "aggFunction": null
+                    }
+                ],
+                "dumProp": [],
+                "groupByKeys": []
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "in",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "out",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Aggregate",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        {
+            "operatorID": "Dummy-operator-0b3d2450-f052-4197-9eaa-745feb7fbcb2",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Column Appender",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-6a1ceeef-3688-4eb0-8ea2-7a9c5c560d36",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Column Renamer",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-b7b373ce-404e-4485-933b-9846f8a1fcf0",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Excel Writer",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-701a06c1-a02c-4626-aaa4-2ff8e935a4c7",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Concatenate",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        },
+        {
+            "operatorID": "Dummy-operator-89359205-13a0-471d-b6c6-4c637b120be6",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Table Cropper",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        }
+    ],
+    "operatorPositions": {
+        "Dummy-operator-c06dfb87-60ac-4b9b-96d0-1314a783e753": {
+            "x": 75.0,
+            "y": 299.0
+        },
+        "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78": {
+            "x": 270.0,
+            "y": 294.0
+        },
+        "Dummy-operator-47cce22c-8d43-42ee-ad59-27cc3b75d54d": {
+            "x": 370.0,
+            "y": 124.0
+        },
+        "Dummy-operator-7534b9f5-2739-4d1c-bb42-6d4b9996ba24": {
+            "x": 175.0,
+            "y": 304.0
+        },
+        "Dummy-operator-247e1230-ea2d-46b8-93e6-61fd32aefba7": {
+            "x": 475.0,
+            "y": 214.0
+        },
+        "Dummy-operator-de63e731-9c13-411d-9e7c-ebcc4129b66e": {
+            "x": 580.0,
+            "y": 214.0
+        },
+        "Dummy-operator-1e68754f-3ec0-4862-be44-fa3830f6ef05": {
+            "x": 910.0,
+            "y": 294.0
+        },
+        "Aggregate-operator-b931f5f0-6c48-4e54-99c6-53dd5996148e": {
+            "x": 1130.0,
+            "y": 369.0
+        },
+        "Dummy-operator-0b3d2450-f052-4197-9eaa-745feb7fbcb2": {
+            "x": 1310.0,
+            "y": 304.0
+        },
+        "Dummy-operator-6a1ceeef-3688-4eb0-8ea2-7a9c5c560d36": {
+            "x": 1225.0,
+            "y": 369.0
+        },
+        "Dummy-operator-b7b373ce-404e-4485-933b-9846f8a1fcf0": {
+            "x": 1435.0,
+            "y": 304.0
+        },
+        "Dummy-operator-701a06c1-a02c-4626-aaa4-2ff8e935a4c7": {
+            "x": 705.0,
+            "y": 294.0
+        },
+        "Dummy-operator-89359205-13a0-471d-b6c6-4c637b120be6": {
+            "x": 810.0,
+            "y": 294.0
+        }
+    },
+    "links": [
+        {
+            "linkID": "link-7095ef26-0df9-44d9-918a-5c14fe9f2071",
+            "source": {
+                "operatorID": "Dummy-operator-c06dfb87-60ac-4b9b-96d0-1314a783e753",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-7534b9f5-2739-4d1c-bb42-6d4b9996ba24",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-d0d965ca-2e6b-4f7f-a183-5e3c4da5116c",
+            "source": {
+                "operatorID": "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-47cce22c-8d43-42ee-ad59-27cc3b75d54d",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-4c975a50-4484-491b-abf2-5fbbce0aaca0",
+            "source": {
+                "operatorID": "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-247e1230-ea2d-46b8-93e6-61fd32aefba7",
+                "portID": "input-1"
+            }
+        },
+        {
+            "linkID": "link-1422cbda-44c3-4354-8ffa-3c3e7202b37a",
+            "source": {
+                "operatorID": "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78",
+                "portID": "output-1"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-701a06c1-a02c-4626-aaa4-2ff8e935a4c7",
+                "portID": "input-1"
+            }
+        },
+        {
+            "linkID": "link-88f1fbeb-424e-42e5-8c2e-41c1c9b57571",
+            "source": {
+                "operatorID": "Dummy-operator-47cce22c-8d43-42ee-ad59-27cc3b75d54d",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-247e1230-ea2d-46b8-93e6-61fd32aefba7",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-2b81e440-7038-4275-9d87-5c388a650ecb",
+            "source": {
+                "operatorID": "Dummy-operator-7534b9f5-2739-4d1c-bb42-6d4b9996ba24",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-f4523442-5398-4d2b-8ccb-045324468e78",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-8ca4a1a8-78dc-49c7-87bc-8407ddc6a50e",
+            "source": {
+                "operatorID": "Dummy-operator-247e1230-ea2d-46b8-93e6-61fd32aefba7",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-de63e731-9c13-411d-9e7c-ebcc4129b66e",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-57bdd203-6acc-4cdf-9e46-8189bc3e6fc9",
+            "source": {
+                "operatorID": "Dummy-operator-de63e731-9c13-411d-9e7c-ebcc4129b66e",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-701a06c1-a02c-4626-aaa4-2ff8e935a4c7",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-84c65e23-af89-44d3-913f-c6da8d516ef0",
+            "source": {
+                "operatorID": "Dummy-operator-1e68754f-3ec0-4862-be44-fa3830f6ef05",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-0b3d2450-f052-4197-9eaa-745feb7fbcb2",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-c68777a2-8eeb-43a3-aea5-661c43e8614f",
+            "source": {
+                "operatorID": "Dummy-operator-1e68754f-3ec0-4862-be44-fa3830f6ef05",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Aggregate-operator-b931f5f0-6c48-4e54-99c6-53dd5996148e",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-8b1fb7e2-56d5-4771-ad32-2127a1986921",
+            "source": {
+                "operatorID": "Aggregate-operator-b931f5f0-6c48-4e54-99c6-53dd5996148e",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-6a1ceeef-3688-4eb0-8ea2-7a9c5c560d36",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-f0621c8f-0b96-4763-b890-32cd78a3eb68",
+            "source": {
+                "operatorID": "Dummy-operator-0b3d2450-f052-4197-9eaa-745feb7fbcb2",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-b7b373ce-404e-4485-933b-9846f8a1fcf0",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-cb38fce9-bfdf-4f9e-acb4-c4890ec38f6a",
+            "source": {
+                "operatorID": "Dummy-operator-6a1ceeef-3688-4eb0-8ea2-7a9c5c560d36",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-0b3d2450-f052-4197-9eaa-745feb7fbcb2",
+                "portID": "input-1"
+            }
+        },
+        {
+            "linkID": "link-5c9269eb-1f04-43fa-9e5b-8c97f3111a3c",
+            "source": {
+                "operatorID": "Dummy-operator-701a06c1-a02c-4626-aaa4-2ff8e935a4c7",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-89359205-13a0-471d-b6c6-4c637b120be6",
+                "portID": "input-0"
+            }
+        },
+        {
+            "linkID": "link-163e3e27-802f-45bc-aa23-2bb75a9b5890",
+            "source": {
+                "operatorID": "Dummy-operator-89359205-13a0-471d-b6c6-4c637b120be6",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Dummy-operator-1e68754f-3ec0-4862-be44-fa3830f6ef05",
+                "portID": "input-0"
+            }
+        }
+    ],
+    "groups": [],
+    "breakpoints": {},
+    "commentBoxes": []
+}
