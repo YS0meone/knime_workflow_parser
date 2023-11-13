@@ -6,24 +6,21 @@ import xmltodict
 import os
 from pathlib import Path
 
-TEMPLATE_PATH = Path("./mapping_config.json")
-
 
 class OperatorGenerator():
     """
         OperatorGenerator takes in knime operator type and the dict representation of the operator to create an operator section in the texera workflow. Itrequres a .json file which specify the mapping between the knime operator type and the texera operator template
     """
 
-    def __init__(self, operator_type, input_dict, root_path):
-        self.root_path = root_path
+    def __init__(self, operator_type, input_dict, root_path, config_path):
         # loads the .json as dictionary
-        mapping_json = open(TEMPLATE_PATH, "r")
+        mapping_json = open(config_path, "r")
         self.mapping_config = json.load(mapping_json)
         mapping_json.close()
         self.type = operator_type
         self.input = input_dict
         # read the settings xml file and save it as dict
-        path = self.root_path / self.input["node_settings_file"]
+        path = root_path / self.input["node_settings_file"]
         with open(path, 'r') as xml_file:
             xml_dict = xmltodict.parse(
                 xml_file.read(), dict_constructor=dict)
@@ -42,8 +39,8 @@ class OperatorGenerator():
             self.temp["customDisplayName"] = self.type
         # generate the operatorID for the operator
         self.temp["operatorID"] = self.generate_id(self.temp["operatorType"])
-        # check if we want to map the attribute
-        if self.mapping_config[self.type]["map_attribute"]:
+        # check if we want to map the attribute or if the operator is covered in the config file
+        if self.type in self.mapping_config and self.mapping_config[self.type]["map_attribute"]:
             attr_map = self.mapping_config[self.type]["attribute_mapping"]
             properties = self.temp["operatorProperties"]
             # loop thru each property and config pair
