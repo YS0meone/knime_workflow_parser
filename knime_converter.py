@@ -4,10 +4,13 @@ from pprint import pprint
 from knime_operator_generator import OperatorGenerator
 import re
 import uuid
+from pathlib import Path
+import os
 
 # relative path to the files
-XML_FILE_PATH = "workflow2.xml"
-JSON_FILE_PATH = "output.json"
+ROOT_PATH = Path("./examples/basic_csv_read")
+XML_FILE_PATH = ROOT_PATH / "workflow.xml"
+JSON_FILE_PATH = ROOT_PATH / "output.json"
 
 # texera workflow template
 workflow_temp = {
@@ -96,6 +99,12 @@ def format_dict(xml_dict, ret_dict):
 
 
 def main():
+    # check if we need to convert workflow.knime
+    if not XML_FILE_PATH.exists():
+        knime_path = ROOT_PATH / "workflow.knime"
+        if knime_path.exists():
+            knime_path.rename(XML_FILE_PATH)
+
     # preprocess the input workflow
     xml_dict = read_xml(XML_FILE_PATH)
     kn_dict = {}
@@ -112,7 +121,7 @@ def main():
         # get the operator type of the knime operator
         op_type = remove_pattern(op["node_settings_file"])
         # initialize an operator generator to create operator elements in texera workflow
-        og = OperatorGenerator(op_type, op)
+        og = OperatorGenerator(op_type, op, ROOT_PATH)
         tx_dict["operators"].append(og.get_temp())
         tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
         k2t_mapping[op["id"]] = og.get_id()
