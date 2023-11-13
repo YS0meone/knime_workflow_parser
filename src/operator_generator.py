@@ -39,6 +39,7 @@ class OperatorGenerator():
             self.temp["customDisplayName"] = self.type
         # generate the operatorID for the operator
         self.temp["operatorID"] = self.generate_id(self.temp["operatorType"])
+
         # check if we want to map the attribute or if the operator is covered in the config file
         if self.type in self.mapping_config and self.mapping_config[self.type]["map_attribute"]:
             attr_map = self.mapping_config[self.type]["attribute_mapping"]
@@ -46,34 +47,64 @@ class OperatorGenerator():
             # loop thru each property and config pair
             for prop, config in attr_map.items():
                 # print(prop, config)
-                # check which mapping method we are using for the attribute
-                if config["method"] == "type_casting":
-                    value = self.find_node(config["target"])
-                    type_cast = __builtins__[config["type"]]
-                    properties[prop] = type_cast(value)
-                elif config["method"] == "conditional_type_casting":
-                    if self.find_node(config["condition"]["flag"]) == config["condition"]["value"]:
-                        value = self.find_node(config["target"])
-                        type_cast = __builtins__[config["type"]]
-                        properties[prop] = type_cast(value)
+                # first check if the property is dynamic or not
+                if config["attr_type"] == "dynamic":
+                    prop_group = {}
+                    for p, c in config["group"].items():
+                        prop_group[p] = self.get_property_val(c)
+                    properties[prop].append(prop_group)
+                elif config["attr_type"] == "multi":
+                    properties[prop].append(self.get_property_val(config))
+                elif config["attr_type"] == "default":
+                    properties[prop] = self.get_property_val(config)
+                    # print(prop, properties[prop])
 
-    def find_node(self, node_name):
+    def get_property_val(self, config):
+        if config["method"] == "type_casting":
+            value = self.find_node(config["route"])
+            # in case we didn't find the node
+            if value == None:
+                return None
+            type_cast = __builtins__[config["type"]]
+            return type_cast(value)
+        elif config["method"] == "conditional_type_casting":
+            if self.find_node(config["condition"]["flag"]) == config["condition"]["value"]:
+                value = self.find_node(config["route"])
+                if value == None:
+                    return None
+                type_cast = __builtins__[config["type"]]
+                return type_cast(value)
+        elif config["method"] == "value_mapping":
+            value = self.find_node(config["route"])
+            if value == None:
+                return None
+            if value in config["map"]:
+                return config["map"][value]
+
+    def find_node(self, stops):
         """
             Returns the node value in the self.settings
         """
         # we check before we put the element inside the deque
         # the element inside deque is guaranteed to be dictionary
-        q = deque([self.settings])
-        while q:
-            cur = q.popleft()
-            for key in cur.keys():
-                # print(key)
-                if key == node_name:
-                    return cur[key]
-                else:
-                    if isinstance(cur[key], dict):
-                        q.append(cur[key])
-        return None
+
+        def helper(start, stop):
+            q = deque([start])
+            while q:
+                cur = q.popleft()
+                for key in cur.keys():
+                    if key == stop:
+                        return cur[key]
+                    else:
+                        if isinstance(cur[key], dict):
+                            q.append(cur[key])
+            return None
+        start = self.settings
+        for stop in stops:
+            if not isinstance(start, dict):
+                return None
+            start = helper(start, stop)
+        return start
 
     def format_dict(self, xml_dict, ret_dict):
         """

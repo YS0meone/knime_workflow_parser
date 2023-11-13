@@ -1,7 +1,7 @@
 {
     "operators": [
         {
-            "operatorID": "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff",
+            "operatorID": "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -58,7 +58,7 @@
             "dynamicOutputPorts": true
         },
         {
-            "operatorID": "Dummy-operator-9456d406-4a7b-4820-8435-16db3adfb272",
+            "operatorID": "Dummy-operator-f62dc323-fe29-41b5-a91f-123f30741930",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -115,7 +115,7 @@
             "dynamicOutputPorts": true
         },
         {
-            "operatorID": "Dummy-operator-7b0e4da2-860b-4d60-8fe1-908583152f65",
+            "operatorID": "Dummy-operator-f956831d-3a3c-4379-93cb-b269f4c17dc0",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -172,7 +172,7 @@
             "dynamicOutputPorts": true
         },
         {
-            "operatorID": "Dummy-operator-46cbe87b-fc0b-47b0-9319-2b0956256c50",
+            "operatorID": "Dummy-operator-75163cc2-6101-4340-a00a-7a8d256bce84",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -229,7 +229,7 @@
             "dynamicOutputPorts": true
         },
         {
-            "operatorID": "Dummy-operator-82ae3f2a-0303-4dee-8246-57dd795008dd",
+            "operatorID": "Dummy-operator-0fdb8ae2-7d72-4bfb-a3df-63410cea1efc",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -286,11 +286,11 @@
             "dynamicOutputPorts": true
         },
         {
-            "operatorID": "CSVFileScan-operator-8768bb9b-62d2-43b3-b44a-47d724071949",
+            "operatorID": "CSVFileScan-operator-b1d8cc1e-3f6b-4fcb-a9b8-26e0a1d1dd8f",
             "operatorType": "CSVFileScan",
             "operatorVersion": "902480181191c918a82302e7aee730ea35fae081",
             "operatorProperties": {
-                "fileEncoding": "",
+                "fileEncoding": null,
                 "customDelimiter": ",",
                 "hasHeader": true,
                 "dumProp": [],
@@ -315,7 +315,7 @@
             "dynamicOutputPorts": false
         },
         {
-            "operatorID": "Dummy-operator-412b3749-fe43-4ef6-8570-b9d43fab1895",
+            "operatorID": "Dummy-operator-554f179c-2337-44e2-8678-f148837ba387",
             "operatorType": "Dummy",
             "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
             "operatorProperties": {
@@ -373,110 +373,110 @@
         }
     ],
     "operatorPositions": {
-        "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff": {
+        "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c": {
             "x": 774.0,
             "y": 571.0
         },
-        "Dummy-operator-9456d406-4a7b-4820-8435-16db3adfb272": {
+        "Dummy-operator-f62dc323-fe29-41b5-a91f-123f30741930": {
             "x": 374.0,
             "y": 571.0
         },
-        "Dummy-operator-7b0e4da2-860b-4d60-8fe1-908583152f65": {
+        "Dummy-operator-f956831d-3a3c-4379-93cb-b269f4c17dc0": {
             "x": 390.0,
             "y": 844.0
         },
-        "Dummy-operator-46cbe87b-fc0b-47b0-9319-2b0956256c50": {
+        "Dummy-operator-75163cc2-6101-4340-a00a-7a8d256bce84": {
             "x": 574.0,
             "y": 561.0
         },
-        "Dummy-operator-82ae3f2a-0303-4dee-8246-57dd795008dd": {
+        "Dummy-operator-0fdb8ae2-7d72-4bfb-a3df-63410cea1efc": {
             "x": 965.0,
             "y": 569.0
         },
-        "CSVFileScan-operator-8768bb9b-62d2-43b3-b44a-47d724071949": {
+        "CSVFileScan-operator-b1d8cc1e-3f6b-4fcb-a9b8-26e0a1d1dd8f": {
             "x": 175.0,
             "y": 569.0
         },
-        "Dummy-operator-412b3749-fe43-4ef6-8570-b9d43fab1895": {
+        "Dummy-operator-554f179c-2337-44e2-8678-f148837ba387": {
             "x": 935.0,
             "y": 829.0
         }
     },
     "links": [
         {
-            "linkID": "link-1f7db3d9-886b-484d-9d1d-3c2c3819fad4",
+            "linkID": "link-fbbaa714-bbe2-4956-8817-c8cffc8af788",
             "source": {
-                "operatorID": "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff",
+                "operatorID": "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-82ae3f2a-0303-4dee-8246-57dd795008dd",
+                "operatorID": "Dummy-operator-0fdb8ae2-7d72-4bfb-a3df-63410cea1efc",
                 "portID": "input-0"
             }
         },
         {
-            "linkID": "link-34f7cf3d-2079-4ed5-99df-089de4b08dad",
+            "linkID": "link-ff8ebaaa-86ea-445d-a138-f393c1ada9a8",
             "source": {
-                "operatorID": "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff",
+                "operatorID": "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-412b3749-fe43-4ef6-8570-b9d43fab1895",
+                "operatorID": "Dummy-operator-554f179c-2337-44e2-8678-f148837ba387",
                 "portID": "input-0"
             }
         },
         {
-            "linkID": "link-4b469107-e14f-4559-a38d-c254ca014066",
+            "linkID": "link-1b1b5e48-3577-4c62-96a3-69939d13e407",
             "source": {
-                "operatorID": "Dummy-operator-9456d406-4a7b-4820-8435-16db3adfb272",
+                "operatorID": "Dummy-operator-f62dc323-fe29-41b5-a91f-123f30741930",
                 "portID": "output-1"
             },
             "target": {
-                "operatorID": "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff",
+                "operatorID": "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c",
                 "portID": "input-1"
             }
         },
         {
-            "linkID": "link-dda91f3e-7bd4-4e4c-b037-dfaab8be852b",
+            "linkID": "link-08ee4338-2d50-40fb-8fcb-2b35ebcc3764",
             "source": {
-                "operatorID": "Dummy-operator-9456d406-4a7b-4820-8435-16db3adfb272",
+                "operatorID": "Dummy-operator-f62dc323-fe29-41b5-a91f-123f30741930",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-46cbe87b-fc0b-47b0-9319-2b0956256c50",
+                "operatorID": "Dummy-operator-75163cc2-6101-4340-a00a-7a8d256bce84",
                 "portID": "input-0"
             }
         },
         {
-            "linkID": "link-7a81ed49-5fd5-4b5a-86a3-7ca194febd69",
+            "linkID": "link-130a2a19-43ea-4ed0-ac7d-043fe09965a4",
             "source": {
-                "operatorID": "Dummy-operator-46cbe87b-fc0b-47b0-9319-2b0956256c50",
+                "operatorID": "Dummy-operator-75163cc2-6101-4340-a00a-7a8d256bce84",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-ac6147aa-89b6-446d-8a02-a84ea8fc16ff",
+                "operatorID": "Dummy-operator-5087e39b-13cc-4306-827d-82bc523be81c",
                 "portID": "input-0"
             }
         },
         {
-            "linkID": "link-f1e60c32-e617-446d-8301-411a32bc8c89",
+            "linkID": "link-53758ad8-1b24-461f-9399-678acfa23c3f",
             "source": {
-                "operatorID": "CSVFileScan-operator-8768bb9b-62d2-43b3-b44a-47d724071949",
+                "operatorID": "CSVFileScan-operator-b1d8cc1e-3f6b-4fcb-a9b8-26e0a1d1dd8f",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-7b0e4da2-860b-4d60-8fe1-908583152f65",
+                "operatorID": "Dummy-operator-f956831d-3a3c-4379-93cb-b269f4c17dc0",
                 "portID": "input-0"
             }
         },
         {
-            "linkID": "link-fc1bb38e-71cb-4201-9f1a-0b3a1363bc1d",
+            "linkID": "link-cd681218-e1c2-4c68-a5f3-7f937b195beb",
             "source": {
-                "operatorID": "CSVFileScan-operator-8768bb9b-62d2-43b3-b44a-47d724071949",
+                "operatorID": "CSVFileScan-operator-b1d8cc1e-3f6b-4fcb-a9b8-26e0a1d1dd8f",
                 "portID": "output-0"
             },
             "target": {
-                "operatorID": "Dummy-operator-9456d406-4a7b-4820-8435-16db3adfb272",
+                "operatorID": "Dummy-operator-f62dc323-fe29-41b5-a91f-123f30741930",
                 "portID": "input-0"
             }
         }

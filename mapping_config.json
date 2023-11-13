@@ -31,34 +31,57 @@
         },
         "attribute_mapping": {
             "fileEncoding": {
-                "method": "type_casting",
-                "target": "charset",
-                "type": "str"
+                "attr_type": "default",
+                "method": "value_mapping",
+                "route": [
+                    "charset"
+                ],
+                "map": {
+                    "US-ASCII": "US_ASCII",
+                    "UTF-8": "UTF_8",
+                    "UTF-16": "UTF_16"
+                }
             },
             "customDelimiter": {
+                "attr_type": "default",
                 "method": "type_casting",
-                "target": "column_delimiter",
+                "route": [
+                    "column_delimiter"
+                ],
                 "type": "str"
             },
             "has_column_header": {
+                "attr_type": "default",
                 "method": "type_casting",
-                "target": "has_column_header",
+                "route": [
+                    "has_column_header"
+                ],
                 "type": "bool"
             },
             "limit": {
+                "attr_type": "default",
                 "method": "conditional_type_casting",
-                "target": "max_rows",
+                "route": [
+                    "max_rows"
+                ],
                 "condition": {
-                    "flag": "limit_data_rows",
+                    "flag": [
+                        "limit_data_rows"
+                    ],
                     "value": "true"
                 },
                 "type": "int"
             },
             "offset": {
+                "attr_type": "default",
                 "method": "conditional_type_casting",
-                "target": "number_of_rows_to_skip",
+                "route": [
+                    "number_of_rows_to_skip"
+                ],
                 "condition": {
-                    "flag": "skip_data_rows",
+                    "flag": [
+                        "skip_data_rows"
+                    ],
                     "value": "true"
                 },
                 "type": "int"
@@ -66,26 +89,20 @@
         }
     },
     "Row Aggregator": {
-        "map_attribute": false,
+        "map_attribute": true,
         "operator_template": {
             "operatorID": "Aggregate-operator-bac11107-d027-46e9-b3dc-a445bf0c9b8f",
             "operatorType": "Aggregate",
             "operatorVersion": "2ac2c985e8db60fa2c0450b9ddcf5fc4cc52ff02",
             "operatorProperties": {
-                "aggregations": [
-                    {
-                        "attribute": "",
-                        "result attribute": "",
-                        "aggFunction": null
-                    }
-                ],
+                "aggregations": [],
                 "dumProp": [],
                 "groupByKeys": []
             },
             "inputPorts": [
                 {
                     "portID": "input-0",
-                    "displayName": "in",
+                    "displayName": "",
                     "allowMultiInputs": false,
                     "isDynamicPort": false
                 }
@@ -93,7 +110,7 @@
             "outputPorts": [
                 {
                     "portID": "output-0",
-                    "displayName": "out",
+                    "displayName": "",
                     "allowMultiInputs": false,
                     "isDynamicPort": false
                 }
@@ -104,7 +121,49 @@
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {}
+        "attribute_mapping": {
+            "aggregations": {
+                "attr_type": "dynamic",
+                "group": {
+                    "aggFunction": {
+                        "method": "value_mapping",
+                        "route": [
+                            "aggregationMethod"
+                        ],
+                        "map": {
+                            "COUNT": "count",
+                            "SUM": "sum",
+                            "MIN": "min",
+                            "MAX": "max",
+                            "AVERAGE": "average"
+                        }
+                    },
+                    "result attribute": {
+                        "method": "type_casting",
+                        "route": [
+                            "aggregationMethod"
+                        ],
+                        "type": "str"
+                    },
+                    "attribute": {
+                        "method": "type_casting",
+                        "route": [
+                            "selected_Internals",
+                            "0"
+                        ],
+                        "type": "str"
+                    }
+                }
+            },
+            "groupByKeys": {
+                "attr_type": "multi",
+                "method": "type_casting",
+                "route": [
+                    "categoryColumn"
+                ],
+                "type": "str"
+            }
+        }
     },
     "Dummy": {
         "map_attribute": false,
