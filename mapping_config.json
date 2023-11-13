@@ -104,7 +104,123 @@
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {}
+        "attribute_mapping": {
+
+        }
+    },  
+    "Concatenate": {
+        "map_attribute": false,
+        "operator_template" : {
+            "operatorID":"Union-operator-Placeholder",
+            "operatorType":"Union",
+            "operatorVersion":"Placeholder",
+            "operatorProperties":{
+                "dumProp":[]
+            },
+            "inputPorts":[
+                {
+                    "portID":"input-0",
+                    "displayName":"",
+                    "allowMultiInputs":true,
+                    "isDynamicPort":false
+                }
+            ],
+            "outputPorts":[
+                {
+                    "portID":"output-0",
+                    "displayName":"",
+                    "allowMultiInputs":false,
+                    "isDynamicPort":false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Union",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        "attribute_mapping": {
+            
+        }
+    },
+    "Column Filter": {
+        "map_attribute": false,
+        "operator_template": {
+            "operatorID": "Projection-operator-Placeholder",
+            "operatorType": "Projection",
+            "operatorVersion": "placeholder",
+            "operatorProperties": {
+                "dumProp": []
+            },
+            "inputPorts":[
+                {
+                    "portID":"input-0",
+                    "displayName":"",
+                    "allowMultiInputs":true,
+                    "isDynamicPort":false
+                }
+            ],
+            "outputPorts":[
+                {
+                    "portID":"output-0",
+                    "displayName":"",
+                    "allowMultiInputs":false,
+                    "isDynamicPort":false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Projection",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        "attribute_mapping": { 
+
+        }
+    },
+    "Column Renamer": {
+        "map_attribute": false,
+        "operator_template": {
+            "operatorID": "Projection-operator-Placeholder",
+            "operatorType": "Projection",
+            "operatorVersion": "placeholder",
+            "operatorProperties": {
+                "dumProp": []
+            },
+            "inputPorts":[
+                {
+                    "portID":"input-0",
+                    "displayName":"",
+                    "allowMultiInputs":true,
+                    "isDynamicPort":false
+                }
+            ],
+            "outputPorts":[
+                {
+                    "portID":"output-0",
+                    "displayName":"",
+                    "allowMultiInputs":false,
+                    "isDynamicPort":false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Projection",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        "attribute_mapping": { 
+            "originalAttribute": {
+                "method": "type_casting",
+                "target": "oldname",
+                "type": "str"
+            }, 
+            "alias": {
+                "method": "type_casting",
+                "target": "newname",
+                "type": "str"
+            }
+        }
     },
     "Dummy": {
         "map_attribute": false,
