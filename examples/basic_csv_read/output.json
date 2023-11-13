@@ -1,0 +1,96 @@
+{
+    "operators": [
+        {
+            "operatorID": "CSVFileScan-operator-a34ca236-e7a0-4c2f-868f-f923b326d7d7",
+            "operatorType": "CSVFileScan",
+            "operatorVersion": "902480181191c918a82302e7aee730ea35fae081",
+            "operatorProperties": {
+                "fileEncoding": "US-ASCII",
+                "customDelimiter": ",",
+                "hasHeader": true,
+                "dumProp": [],
+                "fileName": null,
+                "limit": 100,
+                "offset": 2,
+                "has_column_header": true
+            },
+            "inputPorts": [],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "CSV File Scan",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        {
+            "operatorID": "Aggregate-operator-2ffbb84c-0228-4456-bb0b-c985c4ed0de1",
+            "operatorType": "Aggregate",
+            "operatorVersion": "2ac2c985e8db60fa2c0450b9ddcf5fc4cc52ff02",
+            "operatorProperties": {
+                "aggregations": [
+                    {
+                        "attribute": "",
+                        "result attribute": "",
+                        "aggFunction": null
+                    }
+                ],
+                "dumProp": [],
+                "groupByKeys": []
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "in",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "out",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Aggregate",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        }
+    ],
+    "operatorPositions": {
+        "CSVFileScan-operator-a34ca236-e7a0-4c2f-868f-f923b326d7d7": {
+            "x": 105.0,
+            "y": 29.0
+        },
+        "Aggregate-operator-2ffbb84c-0228-4456-bb0b-c985c4ed0de1": {
+            "x": 315.0,
+            "y": 29.0
+        }
+    },
+    "links": [
+        {
+            "linkID": "link-2cd1b3d7-ee1c-4a4e-ab7d-99577ad2f4b9",
+            "source": {
+                "operatorID": "CSVFileScan-operator-a34ca236-e7a0-4c2f-868f-f923b326d7d7",
+                "portID": "output-0"
+            },
+            "target": {
+                "operatorID": "Aggregate-operator-2ffbb84c-0228-4456-bb0b-c985c4ed0de1",
+                "portID": "input-0"
+            }
+        }
+    ],
+    "groups": [],
+    "breakpoints": {},
+    "commentBoxes": []
+}

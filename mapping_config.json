@@ -1,0 +1,169 @@
+{
+    "CSV Reader": {
+        "map_attribute": true,
+        "operator_template": {
+            "operatorID": "",
+            "operatorType": "CSVFileScan",
+            "operatorVersion": "902480181191c918a82302e7aee730ea35fae081",
+            "operatorProperties": {
+                "fileEncoding": "UTF_8",
+                "customDelimiter": ",",
+                "hasHeader": true,
+                "dumProp": [],
+                "fileName": null,
+                "limit": null,
+                "offset": null
+            },
+            "inputPorts": [],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "CSV File Scan",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        "attribute_mapping": {
+            "fileEncoding": {
+                "method": "type_casting",
+                "target": "charset",
+                "type": "str"
+            },
+            "customDelimiter": {
+                "method": "type_casting",
+                "target": "column_delimiter",
+                "type": "str"
+            },
+            "has_column_header": {
+                "method": "type_casting",
+                "target": "has_column_header",
+                "type": "bool"
+            },
+            "limit": {
+                "method": "conditional_type_casting",
+                "target": "max_rows",
+                "condition": {
+                    "flag": "limit_data_rows",
+                    "value": "true"
+                },
+                "type": "int"
+            },
+            "offset": {
+                "method": "conditional_type_casting",
+                "target": "number_of_rows_to_skip",
+                "condition": {
+                    "flag": "skip_data_rows",
+                    "value": "true"
+                },
+                "type": "int"
+            }
+        }
+    },
+    "Row Aggregator": {
+        "map_attribute": false,
+        "operator_template": {
+            "operatorID": "Aggregate-operator-bac11107-d027-46e9-b3dc-a445bf0c9b8f",
+            "operatorType": "Aggregate",
+            "operatorVersion": "2ac2c985e8db60fa2c0450b9ddcf5fc4cc52ff02",
+            "operatorProperties": {
+                "aggregations": [
+                    {
+                        "attribute": "",
+                        "result attribute": "",
+                        "aggFunction": null
+                    }
+                ],
+                "dumProp": [],
+                "groupByKeys": []
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "in",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "out",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Aggregate",
+            "dynamicInputPorts": false,
+            "dynamicOutputPorts": false
+        },
+        "attribute_mapping": {}
+    },
+    "Dummy": {
+        "map_attribute": false,
+        "operator_template": {
+            "operatorID": "Dummy-operator-4d7383c5-9d99-44d3-88f0-0e2672628ab7",
+            "operatorType": "Dummy",
+            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
+            "operatorProperties": {
+                "desc": "",
+                "dumProp": [
+                    {
+                        "dummyAttribute": "source",
+                        "dummyValue": "blah"
+                    }
+                ]
+            },
+            "inputPorts": [
+                {
+                    "portID": "input-0",
+                    "displayName": "",
+                    "allowMultiInputs": true,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "input-1",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "input-2",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": true
+                }
+            ],
+            "outputPorts": [
+                {
+                    "portID": "output-0",
+                    "displayName": "",
+                    "allowMultiInputs": false,
+                    "isDynamicPort": false
+                },
+                {
+                    "portID": "output-1",
+                    "displayName": "",
+                    "isDynamicPort": true
+                },
+                {
+                    "portID": "output-2",
+                    "displayName": "",
+                    "isDynamicPort": true
+                }
+            ],
+            "showAdvanced": false,
+            "isDisabled": false,
+            "customDisplayName": "Dummy",
+            "dynamicInputPorts": true,
+            "dynamicOutputPorts": true
+        }
+    }
+}

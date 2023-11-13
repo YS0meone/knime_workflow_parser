@@ -1,0 +1,23 @@
+2023-10-11 21:24:19,263 : WARN  : comm-pool-thread-2 :  : Node : CSV Reader : 5:1 : Please specify a file
+2023-10-11 21:24:39,481 : ERROR : ModalContext :  : Node : Pie Chart : 5:2 : Could not save model
+java.lang.IllegalArgumentException: The provided settingsObject is not an instance of the provided settingsClass.
+	at org.knime.core.node.util.CheckUtils.checkArgument(CheckUtils.java:258)
+	at org.knime.core.node.util.CheckUtils.checkArgument(CheckUtils.java:119)
+	at org.knime.core.webui.node.dialog.defaultdialog.DefaultNodeSettings.castAndSaveSettings(DefaultNodeSettings.java:381)
+	at org.knime.core.webui.node.dialog.defaultdialog.DefaultNodeSettings.saveSettings(DefaultNodeSettings.java:375)
+	at org.knime.base.views.node.BaseViewsNodeModel.saveSettingsTo(BaseViewsNodeModel.java:265)
+	at org.knime.core.node.Node.saveModelSettingsTo(Node.java:2393)
+	at org.knime.core.node.workflow.NativeNodeContainer.performSaveModelSettingsTo(NativeNodeContainer.java:1178)
+	at org.knime.core.node.workflow.SingleNodeContainer.saveSNCSettings(SingleNodeContainer.java:974)
+	at org.knime.core.node.workflow.FileSingleNodeContainerPersistor.saveSNCSettings(FileSingleNodeContainerPersistor.java:683)
+	at org.knime.core.node.workflow.FileSingleNodeContainerPersistor.save(FileSingleNodeContainerPersistor.java:636)
+	at org.knime.core.node.workflow.FileWorkflowPersistor.saveNodeContainer(FileWorkflowPersistor.java:2302)
+	at org.knime.core.node.workflow.FileWorkflowPersistor.saveContent(FileWorkflowPersistor.java:2050)
+	at org.knime.core.node.workflow.FileWorkflowPersistor.save(FileWorkflowPersistor.java:1941)
+	at org.knime.core.node.workflow.WorkflowManager.save(WorkflowManager.java:9363)
+	at org.knime.core.node.workflow.WorkflowManager.save(WorkflowManager.java:9312)
+	at org.knime.ui.java.api.SaveWorkflow.saveRegularWorkflow(SaveWorkflow.java:185)
+	at org.knime.ui.java.api.SaveWorkflow.saveWorkflow(SaveWorkflow.java:171)
+	at org.knime.ui.java.api.SaveWorkflow.lambda$4(SaveWorkflow.java:155)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+2023-10-11 21:29:39,745 : WARN  : KNIME-Worker-5-Bar Chart 5:2 :  : Node : Bar Chart : 5:2 : There are rows with missing values in one of the selected frequency columns. These frequencies are not displayed for this row.
