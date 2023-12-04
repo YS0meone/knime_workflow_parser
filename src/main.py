@@ -116,11 +116,17 @@ def main():
     xml_path = root_path / "workflow.xml"
     output_path = args.output
     config_path = args.config
-    # check if we need to convert workflow.knime
-    if not xml_path.exists():
-        knime_path = root_path / "workflow.knime"
-        if knime_path.exists():
-            knime_path.rename(xml_path)
+    try:
+        # check if we need to convert workflow.knime
+        if not xml_path.exists():
+            knime_path = root_path / "workflow.knime"
+            if knime_path.exists():
+                knime_path.rename(xml_path)
+            else:
+                raise FileNotFoundError(
+                    "Knime workflow.knime not found, invalid workflow!")
+    except FileNotFoundError as e:
+        print(e)
 
     # preprocess the input workflow
     xml_dict = read_xml(xml_path)
@@ -128,12 +134,14 @@ def main():
     format_dict(xml_dict, kn_dict)
     # the dictionary representation of the knime workflow in dict
     kn_dict = kn_dict["workflow.knime"]
+
     tx_dict = workflow_temp.copy()
     # the operatorID mapping between knime and texera
     k2t_mapping = {}
     kn_ops = kn_dict["nodes"]
 
     # parsing the operator part
+    # The mapping direction: Knime -> Texera
     for op in kn_ops.values():
         # get the operator type of the knime operator
         op_type = remove_pattern(op["node_settings_file"])
@@ -147,7 +155,6 @@ def main():
     connections = kn_dict["connections"]
     for connection in connections.values():
         tx_dict["links"].append(generate_link(k2t_mapping, connection))
-
     get_output(output_path, tx_dict)
 
 

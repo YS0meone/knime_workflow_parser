@@ -1,19 +1,7 @@
 {
     "CSV Reader": {
-        "map_attribute": true,
-        "operator_template": {
-            "operatorID": "",
+        "operator_specs": {
             "operatorType": "CSVFileScan",
-            "operatorVersion": "902480181191c918a82302e7aee730ea35fae081",
-            "operatorProperties": {
-                "fileEncoding": "UTF_8",
-                "customDelimiter": ",",
-                "hasHeader": true,
-                "dumProp": [],
-                "fileName": null,
-                "limit": null,
-                "offset": null
-            },
             "inputPorts": [],
             "outputPorts": [
                 {
@@ -25,80 +13,87 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "CSV File Scan",
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {
+        "property_mapping": {
             "fileEncoding": {
-                "attr_type": "default",
-                "method": "value_mapping",
-                "route": [
-                    "charset"
+                "action": "one_to_one",
+                "paths": [
+                    [
+                        "charset"
+                    ]
                 ],
-                "map": {
-                    "US-ASCII": "US_ASCII",
-                    "UTF-8": "UTF_8",
-                    "UTF-16": "UTF_16"
+                "action_config": {
+                    "map": {
+                        "US-ASCII": "US_ASCII",
+                        "UTF-8": "UTF_8",
+                        "UTF-16": "UTF_16",
+                        "_DEFAULT": "UTF_8"
+                    }
                 }
             },
             "customDelimiter": {
-                "attr_type": "default",
-                "method": "type_casting",
-                "route": [
-                    "column_delimiter"
+                "action": "type_casting",
+                "paths": [
+                    [
+                        "column_delimiter"
+                    ]
                 ],
-                "type": "str"
+                "action_config": {
+                    "type": "str"
+                }
             },
-            "has_column_header": {
-                "attr_type": "default",
-                "method": "type_casting",
-                "route": [
-                    "has_column_header"
+            "hasHeader": {
+                "action": "type_casting",
+                "paths": [
+                    [
+                        "has_column_header"
+                    ]
                 ],
-                "type": "bool"
+                "action_config": {
+                    "type": "bool"
+                }
             },
             "limit": {
-                "attr_type": "default",
-                "method": "conditional_type_casting",
-                "route": [
-                    "max_rows"
+                "action": "conditional_type_casting",
+                "paths": [
+                    [
+                        "max_rows"
+                    ]
                 ],
-                "condition": {
-                    "flag": [
-                        "limit_data_rows"
-                    ],
-                    "value": "true"
-                },
-                "type": "int"
+                "action_config": {
+                    "condition": {
+                        "flag": [
+                            "limit_data_rows"
+                        ],
+                        "value": "true"
+                    },
+                    "type": "int"
+                }
             },
             "offset": {
-                "attr_type": "default",
-                "method": "conditional_type_casting",
-                "route": [
-                    "number_of_rows_to_skip"
+                "action": "conditional_type_casting",
+                "paths": [
+                    [
+                        "number_of_rows_to_skip"
+                    ]
                 ],
-                "condition": {
-                    "flag": [
-                        "skip_data_rows"
-                    ],
-                    "value": "true"
-                },
-                "type": "int"
+                "action_config": {
+                    "condition": {
+                        "flag": [
+                            "skip_data_rows"
+                        ],
+                        "value": "true"
+                    },
+                    "type": "int"
+                }
             }
         }
     },
     "Row Aggregator": {
-        "map_attribute": true,
-        "operator_template": {
-            "operatorID": "Aggregate-operator-bac11107-d027-46e9-b3dc-a445bf0c9b8f",
+        "operator_specs": {
             "operatorType": "Aggregate",
-            "operatorVersion": "2ac2c985e8db60fa2c0450b9ddcf5fc4cc52ff02",
-            "operatorProperties": {
-                "aggregations": [],
-                "dumProp": [],
-                "groupByKeys": []
-            },
             "inputPorts": [
                 {
                     "portID": "input-0",
@@ -117,63 +112,80 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "Aggregate",
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {
+        "property_mapping": {
             "aggregations": {
-                "attr_type": "dynamic",
-                "group": {
-                    "aggFunction": {
-                        "method": "value_mapping",
-                        "route": [
-                            "aggregationMethod"
-                        ],
-                        "map": {
-                            "COUNT": "count",
-                            "SUM": "sum",
-                            "MIN": "min",
-                            "MAX": "max",
-                            "AVERAGE": "average"
+                "action": "recursive_retrieve",
+                "paths": [
+                    []
+                ],
+                "action_config": {
+                    "group": {
+                        "aggFunction": {
+                            "action": "one_to_one",
+                            "paths": [
+                                "aggregationMethod"
+                            ],
+                            "action_config": {
+                                "map": {
+                                    "COUNT": "count",
+                                    "SUM": "sum",
+                                    "MIN": "min",
+                                    "MAX": "max",
+                                    "AVERAGE": "average",
+                                    "_DEFAULT": "count"
+                                }
+                            }
+                        },
+                        "result attribute": {
+                            "action": "type_casting",
+                            "paths": [
+                                [
+                                    "aggregationMethod"
+                                ]
+                            ],
+                            "action_config": {
+                                "type": "str"
+                            }
+                        },
+                        "attribute": {
+                            "action": "type_casting",
+                            "paths": [
+                                [
+                                    "selected_Internals",
+                                    "0"
+                                ]
+                            ],
+                            "action_config": {
+                                "type": "str"
+                            }
                         }
-                    },
-                    "result attribute": {
-                        "method": "type_casting",
-                        "route": [
-                            "aggregationMethod"
-                        ],
-                        "type": "str"
-                    },
-                    "attribute": {
-                        "method": "type_casting",
-                        "route": [
-                            "selected_Internals",
-                            "0"
-                        ],
-                        "type": "str"
                     }
                 }
             },
             "groupByKeys": {
-                "attr_type": "multi",
-                "method": "type_casting",
-                "route": [
-                    "categoryColumn"
+                "action": "sequential_retrieve",
+                "paths": [
+                    [
+                        "categoryColumn"
+                    ]
                 ],
-                "type": "str"
+                "action_config": {
+                    "value_mappings": [
+                        [
+                            "type_casting",
+                            "str"
+                        ]
+                    ]
+                }
             }
         }
     },
     "Concatenate": {
-        "map_attribute": false,
-        "operator_template": {
-            "operatorID": "Union-operator-Placeholder",
+        "operator_specs": {
             "operatorType": "Union",
-            "operatorVersion": "Placeholder",
-            "operatorProperties": {
-                "dumProp": []
-            },
             "inputPorts": [
                 {
                     "portID": "input-0",
@@ -192,21 +204,14 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "Union",
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {}
+        "property_mapping": {}
     },
     "Column Filter": {
-        "map_attribute": false,
-        "operator_template": {
-            "operatorID": "Projection-operator-Placeholder",
+        "operator_specs": {
             "operatorType": "Projection",
-            "operatorVersion": "placeholder",
-            "operatorProperties": {
-                "dumProp": []
-            },
             "inputPorts": [
                 {
                     "portID": "input-0",
@@ -225,21 +230,14 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "Projection",
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {}
+        "property_mapping": {}
     },
     "Column Renamer": {
-        "map_attribute": false,
-        "operator_template": {
-            "operatorID": "Projection-operator-Placeholder",
+        "operator_specs": {
             "operatorType": "Projection",
-            "operatorVersion": "placeholder",
-            "operatorProperties": {
-                "dumProp": []
-            },
             "inputPorts": [
                 {
                     "portID": "input-0",
@@ -258,38 +256,37 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "Projection",
             "dynamicInputPorts": false,
             "dynamicOutputPorts": false
         },
-        "attribute_mapping": {
+        "property_mapping": {
             "originalAttribute": {
-                "method": "type_casting",
-                "target": "oldname",
-                "type": "str"
+                "action": "type_casting",
+                "paths": [
+                    [
+                        "oldname"
+                    ]
+                ],
+                "action_config": {
+                    "type": "str"
+                }
             },
             "alias": {
-                "method": "type_casting",
-                "target": "newname",
-                "type": "str"
+                "action": "type_casting",
+                "paths": [
+                    [
+                        "newname"
+                    ]
+                ],
+                "action_config": {
+                    "type": "str"
+                }
             }
         }
     },
     "Dummy": {
-        "map_attribute": false,
-        "operator_template": {
-            "operatorID": "Dummy-operator-4d7383c5-9d99-44d3-88f0-0e2672628ab7",
+        "operator_specs": {
             "operatorType": "Dummy",
-            "operatorVersion": "819a6267e6337d4e9308275f6bca12b00b767740",
-            "operatorProperties": {
-                "desc": "",
-                "dumProp": [
-                    {
-                        "dummyAttribute": "source",
-                        "dummyValue": "blah"
-                    }
-                ]
-            },
             "inputPorts": [
                 {
                     "portID": "input-0",
@@ -330,9 +327,9 @@
             ],
             "showAdvanced": false,
             "isDisabled": false,
-            "customDisplayName": "Dummy",
             "dynamicInputPorts": true,
             "dynamicOutputPorts": true
-        }
+        },
+        "property_mapping": {}
     }
 }
