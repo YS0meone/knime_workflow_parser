@@ -1,3 +1,4 @@
+import ast
 from collections import deque
 from typing import Any
 from copy import deepcopy
@@ -47,45 +48,54 @@ class NodeRetriever():
         else:
             return mapping["_DEFAULT"]
 
-    def retrieve_node(self, paths: list[list[str]], action: str, action_config: dict) -> Any:
+    def retrieve_node(self, paths: list[list[str]], action: str) -> Any:
         # retrieve node takes into consideration that the mapping between nodes might be one2one one2many or one2zero. The path would variable stores all of the paths to the desired value
         target_values = []
         for path in paths:
             target_values.append(self.find_node(path))
         # need to guard
-        if action == "type_casting":
-            # in case we didn't find the node
-            if len(target_values) != 1:
-                raise ValueError(
-                    "Incorrect number of target values for type casting!")
-            if target_values == "COUNT":
-                pprint(self.tree)
-            return self.type_cast(target_values[0], action_config["type"])
-        elif action == "conditional_type_casting":
-            if len(target_values) != 1:
-                raise ValueError(
-                    "Incorrect number of target values for conditional type casting!")
-            if self.find_node(action_config["condition"]["flag"]) == action_config["condition"]["value"]:
-                return self.type_cast(target_values[0], action_config["type"])
-        elif action == "one_to_one":
-            if len(target_values) != 1:
-                raise ValueError(
-                    "Incorrect number of target values for one to one!")
-            return self.one_to_one(target_values[0], action_config["map"])
+        # TODO: make the action to be a string of python code
+        action = action.replace("$values", "target_values")
+        # TODO: Need to guard agains malicious lambda function
+        exec(action, None, locals())
+        if "ret" in locals():
+            return locals()["ret"]
+        else:
+            raise ValueError("Action does not contain a return value")
 
-        elif action == "sequential_retrieve":
-            ret = []
-            for i in range(len(target_values)):
-                if action_config["value_mappings"][i][0] == "type_casting":
-                    ret.append(self.type_cast(
-                        target_values[i], action_config["value_mappings"][i][1]))
-                elif action_config["value_mappings"][i][0] == "one_to_one":
-                    ret.append(self.one_to_one(
-                        target_values[i], action_config["value_mappings"][i][1]))
-            return ret
-        elif action == "recursive_retrieve":
-            ret = {}
-            for key, config in action_config["group"].items():
-                ret[key] = self.retrieve_node(
-                    config["paths"], config["action"], config["action_config"])
-            return [ret]
+        # if action == "type_casting":
+        #     # in case we didn't find the node
+        #     if len(target_values) != 1:
+        #         raise ValueError(
+        #             "Incorrect number of target values for type casting!")
+        #     if target_values == "COUNT":
+        #         pprint(self.tree)
+        #     return self.type_cast(target_values[0], action_config["type"])
+        # elif action == "conditional_type_casting":
+        #     if len(target_values) != 1:
+        #         raise ValueError(
+        #             "Incorrect number of target values for conditional type casting!")
+        #     if self.find_node(action_config["condition"]["flag"]) == action_config["condition"]["value"]:
+        #         return self.type_cast(target_values[0], action_config["type"])
+        # elif action == "one_to_one":
+        #     if len(target_values) != 1:
+        #         raise ValueError(
+        #             "Incorrect number of target values for one to one!")
+        #     return self.one_to_one(target_values[0], action_config["map"])
+
+        # elif action == "sequential_retrieve":
+        #     ret = []
+        #     for i in range(len(target_values)):
+        #         if action_config["value_mappings"][i][0] == "type_casting":
+        #             ret.append(self.type_cast(
+        #                 target_values[i], action_config["value_mappings"][i][1]))
+        #         elif action_config["value_mappings"][i][0] == "one_to_one":
+        #             ret.append(self.one_to_one(
+        #                 target_values[i], action_config["value_mappings"][i][1]))
+        #     return ret
+        # elif action == "recursive_retrieve":
+        #     ret = {}
+        #     for key, config in action_config["group"].items():
+        #         ret[key] = self.retrieve_node(
+        #             config["paths"], config["action"], config["action_config"])
+        #     return [ret]

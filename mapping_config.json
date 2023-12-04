@@ -18,76 +18,59 @@
         },
         "property_mapping": {
             "fileEncoding": {
-                "action": "one_to_one",
                 "paths": [
                     [
                         "charset"
                     ]
                 ],
-                "action_config": {
-                    "map": {
-                        "US-ASCII": "US_ASCII",
-                        "UTF-8": "UTF_8",
-                        "UTF-16": "UTF_16",
-                        "_DEFAULT": "UTF_8"
-                    }
-                }
+                "action": "\nif $values[0] in [\"UTF-8\", \"UTF-16\", \"US-ASCII\"]:\n    ret = $values[0].replace(\"-\",\"_\")\n"
             },
             "customDelimiter": {
-                "action": "type_casting",
                 "paths": [
                     [
                         "column_delimiter"
                     ]
                 ],
-                "action_config": {
-                    "type": "str"
-                }
+                "action": "ret = $values[0]"
             },
             "hasHeader": {
-                "action": "type_casting",
                 "paths": [
                     [
                         "has_column_header"
                     ]
                 ],
-                "action_config": {
-                    "type": "bool"
-                }
+                "action": "\nret = True if $values[0] == \"true\" else False\n"
+            },
+            "fileName": {
+                "paths": [
+                    [
+                        "path",
+                        "path"
+                    ]
+                ],
+                "action": "ret = $values[0]"
             },
             "limit": {
-                "action": "conditional_type_casting",
                 "paths": [
+                    [
+                        "limit_data_rows"
+                    ],
                     [
                         "max_rows"
                     ]
                 ],
-                "action_config": {
-                    "condition": {
-                        "flag": [
-                            "limit_data_rows"
-                        ],
-                        "value": "true"
-                    },
-                    "type": "int"
-                }
+                "action": "\nif $values[0] == \"true\":\n    ret = int($values[1])\nelse:\n    ret = None\n"
             },
             "offset": {
-                "action": "conditional_type_casting",
                 "paths": [
+                    [
+                        "skip_data_rows"
+                    ],
                     [
                         "number_of_rows_to_skip"
                     ]
                 ],
-                "action_config": {
-                    "condition": {
-                        "flag": [
-                            "skip_data_rows"
-                        ],
-                        "value": "true"
-                    },
-                    "type": "int"
-                }
+                "action": "\nif $values[0] == \"true\":\n    ret = int($values[1])\nelse:\n    ret = None\n"
             }
         }
     },
@@ -117,69 +100,27 @@
         },
         "property_mapping": {
             "aggregations": {
-                "action": "recursive_retrieve",
                 "paths": [
-                    []
+                    [
+                        "aggregationMethod"
+                    ],
+                    [
+                        "aggregationMethod"
+                    ],
+                    [
+                        "selected_Internals",
+                        "0"
+                    ]
                 ],
-                "action_config": {
-                    "group": {
-                        "aggFunction": {
-                            "action": "one_to_one",
-                            "paths": [
-                                "aggregationMethod"
-                            ],
-                            "action_config": {
-                                "map": {
-                                    "COUNT": "count",
-                                    "SUM": "sum",
-                                    "MIN": "min",
-                                    "MAX": "max",
-                                    "AVERAGE": "average",
-                                    "_DEFAULT": "count"
-                                }
-                            }
-                        },
-                        "result attribute": {
-                            "action": "type_casting",
-                            "paths": [
-                                [
-                                    "aggregationMethod"
-                                ]
-                            ],
-                            "action_config": {
-                                "type": "str"
-                            }
-                        },
-                        "attribute": {
-                            "action": "type_casting",
-                            "paths": [
-                                [
-                                    "selected_Internals",
-                                    "0"
-                                ]
-                            ],
-                            "action_config": {
-                                "type": "str"
-                            }
-                        }
-                    }
-                }
+                "action": "\nret = []\nfor i in range(0, len($values), 3):\n    group = {}\n    group[\"aggFunction\"] = $values[i].lower()\n    group[\"result attribute\"] = $values[i + 1]\n    group[\"attribute\"] = $values[i + 2]\n    ret.append(group)\n"
             },
             "groupByKeys": {
-                "action": "sequential_retrieve",
                 "paths": [
                     [
                         "categoryColumn"
                     ]
                 ],
-                "action_config": {
-                    "value_mappings": [
-                        [
-                            "type_casting",
-                            "str"
-                        ]
-                    ]
-                }
+                "action": "\nret = []\nfor val in $values:\n    ret.append(val)\n"
             }
         }
     },

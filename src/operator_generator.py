@@ -92,7 +92,7 @@ class OperatorGenerator():
                 # print(prop, config)
                 # first check if the property is dynamic or not
                 properties[prop] = NR.retrieve_node(
-                    config["paths"], config["action"], config["action_config"])
+                    config["paths"], config["action"])
 
     def get_temp(self):
         return self._temp
