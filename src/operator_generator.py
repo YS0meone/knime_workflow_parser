@@ -1,5 +1,5 @@
 import uuid
-import json
+import yaml
 from pprint import pprint
 from collections import deque
 import xmltodict
@@ -30,9 +30,9 @@ class OperatorGenerator():
 
     def __init__(self, operator_type: str, input_dict: dict, root_path: Path, config_path: Path) -> None:
         # loads the .json as dictionary
-        mapping_json = open(config_path, "r")
-        self.mapping_config = json.load(mapping_json)
-        mapping_json.close()
+        mapping_yaml = open(config_path, "r")
+        self.mapping_config = yaml.safe_load(mapping_yaml)
+        mapping_yaml.close()
         self.type = operator_type
         self.input = input_dict
         # read the settings xml file and save it as dict
@@ -91,8 +91,9 @@ class OperatorGenerator():
             for prop, config in prop_map.items():
                 # print(prop, config)
                 # first check if the property is dynamic or not
+                print("Now retrieving", prop)
                 properties[prop] = NR.retrieve_node(
-                    config["paths"], config["action"])
+                    config["nodes"], config["action"])
 
     def get_temp(self):
         return self._temp
