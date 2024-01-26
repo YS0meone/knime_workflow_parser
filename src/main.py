@@ -1,15 +1,17 @@
 import json
 import xmltodict
 from pprint import pprint
+from typing import Dict, Any
 from operator_generator import OperatorGenerator
 import re
 import uuid
 from pathlib import Path
 import os
 import argparse
+import shutil
 
 # texera workflow template
-workflow_temp = {
+TEXERA_WORKFLOW_TEMPLATE = {
     "operators": [],
     "operatorPositions": {},
     "links": [],
@@ -19,7 +21,7 @@ workflow_temp = {
 }
 
 
-def parse_args():
+def parse_args() -> argparse.Namespace:
     """
         Parse the system arguments and return them
     """
@@ -34,7 +36,7 @@ def parse_args():
     return args
 
 
-def read_xml(path):
+def parse_xml(path: str | Path) -> dict:
     """
         read the knime workflow xml file and convert to the dictionary
     """
@@ -44,7 +46,7 @@ def read_xml(path):
         return data_dict
 
 
-def get_output(path, data):
+def generate_texera_workflow(path: str | Path, data: dict) -> None:
     """
         dump the dictionary as json file for texera to read
     """
@@ -52,15 +54,15 @@ def get_output(path, data):
         json.dump(data, json_file, indent=4)
 
 
-def remove_pattern(input_str):
+def get_knime_operator_type(filename: str) -> str:
     """
-        remove the pattern to get the knime's operator type
+        remove the pattern in the filename to get the knime's operator type
     """
     pattern = r' \(\#\d+\)/settings.xml'
-    return re.sub(pattern, '', input_str)
+    return re.sub(pattern, '', filename)
 
 
-def generate_link(mapping, connection):
+def generate_link(mapping: Dict[str, str], connection: dict) -> dict:
     """
         Given the operatorID mappings between knime and texera, and the connection section of knime, create connection element in the texera workflow to generate links
     """
@@ -87,7 +89,7 @@ def generate_link(mapping, connection):
     return template
 
 
-def format_dict(xml_dict, ret_dict):
+def format_dict(xml_dict: dict, ret_dict: dict) -> None:
     """
         Further process the parse Knime workflow dictionary to make the keys and values more meaningful
     """
@@ -113,50 +115,49 @@ def main():
     # get the root path from the system arguments
     args = parse_args()
     root_path = args.input
-    xml_path = root_path / "workflow.xml"
+    knime_path = root_path / "workflow.knime"
     output_path = args.output
     config_path = args.config
     try:
         # check if we need to convert workflow.knime
-        if not xml_path.exists():
-            knime_path = root_path / "workflow.knime"
-            if knime_path.exists():
-                knime_path.rename(xml_path)
-            else:
-                raise FileNotFoundError(
-                    "Knime workflow.knime not found, invalid workflow!")
+        xml_path = root_path / "workflow.xml"
+        if knime_path.exists():
+            shutil.copy(knime_path, xml_path)
+        elif not xml_path.exists():
+            raise FileNotFoundError("Neither workflow.xml nor workflow.knime exist")
     except FileNotFoundError as e:
-        print(e)
-
+        print(f"Error occurred when looking for metadata: {e}")
+    except IOError as e:
+        print(f"Error occurred while creating workflow.xml: {e}")
     # preprocess the input workflow
-    xml_dict = read_xml(xml_path)
+    xml_dict = parse_xml(xml_path)
     kn_dict = {}
     format_dict(xml_dict, kn_dict)
     # the dictionary representation of the knime workflow in dict
     kn_dict = kn_dict["workflow.knime"]
-
-    tx_dict = workflow_temp.copy()
+    tx_dict = TEXERA_WORKFLOW_TEMPLATE
     # the operatorID mapping between knime and texera
-    k2t_mapping = {}
-    kn_ops = kn_dict["nodes"]
+    k2t_id_mapping = {}
+    kn_ops_setting = kn_dict["nodes"]
 
     # parsing the operator part
     # The mapping direction: Knime -> Texera
-    for op in kn_ops.values():
+    for kn_op_setting in kn_ops_setting.values():
         # get the operator type of the knime operator
-        op_type = remove_pattern(op["node_settings_file"])
+        kn_op_type = get_knime_operator_type(kn_op_setting["node_settings_file"])
         # initialize an operator generator to create operator elements in texera workflow
-        og = OperatorGenerator(op_type, op, root_path, config_path)
+        og = OperatorGenerator(kn_op_type, kn_op_setting, root_path, config_path)
         tx_dict["operators"].append(og.get_temp())
         tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
-        k2t_mapping[op["id"]] = og.get_id()
+        k2t_id_mapping[kn_op_setting["id"]] = og.get_id()
 
     # parsing the connection part
     connections = kn_dict["connections"]
     for connection in connections.values():
-        tx_dict["links"].append(generate_link(k2t_mapping, connection))
-    get_output(output_path, tx_dict)
+        tx_dict["links"].append(generate_link(k2t_id_mapping, connection))
+    generate_texera_workflow(output_path, tx_dict)
 
 
 if __name__ == "__main__":
     main()
+

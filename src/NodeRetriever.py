@@ -1,7 +1,6 @@
 import ast
 from collections import deque
 from typing import Any
-from copy import deepcopy
 from pprint import pprint
 
 
@@ -31,22 +30,12 @@ class NodeRetriever():
                         if isinstance(cur[key], dict):
                             q.append(cur[key])
             return None
-        start = deepcopy(self.tree)
+        start = self.tree
         for stop in stops:
             if not isinstance(start, dict):
                 return None
             start = helper(start, stop)
         return start
-
-    def type_cast(self, target_value, type):
-        type_cast = __builtins__[type]
-        return type_cast(target_value)
-
-    def one_to_one(self, target_value, mapping):
-        if target_value in mapping:
-            return mapping[target_value]
-        else:
-            return mapping["_DEFAULT"]
     
     def str2path(self, str_path: str) -> list[str]:
         # convert a string path into a list format
@@ -60,14 +49,15 @@ class NodeRetriever():
                 # store all needed local variables
                 locals()[var] = self.find_node(self.str2path(path))
             # need to guard
-            # TODO: make the action to be a string of python code
             # TODO: Need to guard agains malicious lambda function
         if isinstance(nodes, list):
             for i in range(len(nodes)):
                 for var, path in nodes[i].items():
                     nodes[i][var] = self.find_node(self.str2path(path))
-                    
-        exec(action, None, locals())
+        try:     
+            exec(action, None, locals())
+        except Exception as e:
+            print("Error occurred while executing the user-defined python code: {e}")
         if "ret" in locals():
             return locals()["ret"]
         else:

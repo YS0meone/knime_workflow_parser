@@ -4,13 +4,10 @@
 import json
 # write your code into the code string and execute the module
 code_string = '''
-ret = []
-for i in range(0, len($values), 3):
-    group = {}
-    group["aggFunction"] = $values[i].lower()
-    group["result attribute"] = $values[i + 1]
-    group["attribute"] = $values[i + 2]
-    ret.append(group)
+if $values[0] in ["UTF-8", "UTF-16", "US-ASCII"]:
+    ret = $values[0].replace("-","_")
+else:
+    ret = "UTF_8"
 '''
 
 # Convert the string to a JSON-serialized format
