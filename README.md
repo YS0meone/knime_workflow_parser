@@ -2,9 +2,9 @@
 ## About the project
 The project parses workflow metadata from other ML platform into a read-only Texera workflow. Currently the code can only handle the Knime workflow metadata. The parser is capable of perserving the topological structure of the workflow and converting each operator's property between two platforms if such mapping relationship exists.
 
-![Before Parsing](https://drive.google.com/uc?export=view&id=1LPGWyVk0HHzF9yG-acMJyXJtPyxtbu5N)
+![Before Parsing](https://drive.google.com/uc?export=view&id=1LPGWyVk0HHzF9yG-acMJyXJtPyxtbu5N "Before Parsing")
 
-![After Parsing](https://drive.google.com/uc?export=view&id=1LYn-x7qhNj8nblvipJN2CJKepyNWFjbU)
+![After Parsing](https://drive.google.com/uc?export=view&id=1LYn-x7qhNj8nblvipJN2CJKepyNWFjbU "After Parsing")
 
 ## Setting Up Your Virtual Project Environment
 1. Navigate to the project root directory
@@ -52,4 +52,6 @@ fi
 
 Again the `workflow.json` file would be generated in the workflow folder.
 
-
+## Steps to Run Unit Tests
+1. Navigate to the test foler
+2. Run `python test_noderetriever.py`
