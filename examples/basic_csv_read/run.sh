@@ -6,5 +6,5 @@ if python "./src/main.py" \
     --config "$(pwd)/mapping_config.yaml"; then
     :
 else
-    die "Python quit unexpectedly!"
+    echo "Python quit unexpectedly!"
 fi
