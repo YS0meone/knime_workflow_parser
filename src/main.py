@@ -50,6 +50,7 @@ def generate_texera_workflow(path: str | Path, data: dict) -> None:
     """
         dump the dictionary as json file for texera to read
     """
+    path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, 'w') as json_file:
         json.dump(data, json_file, indent=4)
 

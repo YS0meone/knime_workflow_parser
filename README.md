@@ -31,24 +31,31 @@ To deactivate the virtual environment, type `deactivate`
 1. Navigate to the project root directory
 2. Run the following command 
 ```bash
-cd examples/basic_csv_read/ && ./run.sh
+./run_all_examples.sh
 ```
-The result would be a json file called `workflow.json`. You can find it in the basic_csv_read folder. To view it, simply import the json file in Texera.
+The result would be a json file called `converted_<your_workflow_name>.json`. You can find it in the output folder. To view it, simply import the json file in Texera.
 
 ## Steps to Convert New Workflows
 1. Store the Knime workflow folder inside the ./example/ directory (You can find the workflow folder in your Knime workspace directory)
-2. Create a shell script in the workflow folder with the following content:
+2. Modify the run_all_examples.sh (shown below). You should add the name of your new workflow in the workflows variable. 
 ```bash
-dir=$(pwd)
-cd ../..
-if python "./src/main.py" \
-    --input "$dir" \
-    --output "$dir/output.json" \
-    --config "$(pwd)/mapping_config.yaml"; then
-    :
-else
-    echo "Python quit unexpectedly!"
-fi
+root=$(pwd)
+config="$root/mapping_config.yaml"
+workflows=("workflow_1" "workflow_2" "workflow_3" "newly_added_workflow")
+
+for workflow in "${workflows[@]}"; do
+    input="$root/examples/${workflow}"
+    output="$root/output/converted_${workflow}.json"
+    
+    if python "$root/src/main.py" --input "$input" --output "$output" --config "$config"; then
+        echo "${workflow} completed successfully."
+    else
+        echo "${workflow} quit unexpectedly!"
+        exit 1
+    fi
+done
+
+echo "All workflows completed successfully."
 ```
 3. Run the shell script from the workflow folder `./run.sh`
 
