@@ -135,4 +135,4 @@ CSV Reader:
 *  Workflow parser cannot handle KNIME's meta nodes which contains sub-workflow inside
 * The number of input output ports of dummy operators are hard coded as three. 
 * Comment conversion is not yet implemented
- 
+* Only two operators: CSV Reader and Row Aggregator are fully configured for workflow conversion. Other opoerators would all gets mapped to dummy operator

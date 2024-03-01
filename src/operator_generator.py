@@ -79,6 +79,4 @@ class OperatorGenerator():
         return self._temp["operatorID"]
 
     def generate_pos(self) -> dict:
-        # TODO: The position might not be working in Texera. Scale it into texera's boundary
-        """get the position of the knime's operator. NOTICE: MIGHT BE BOUNDARY ISSUE. SHOULD TEST FOR BOUNDARY IF NEEDED"""
         return {"x": float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["0"]), "y": float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["1"])}
