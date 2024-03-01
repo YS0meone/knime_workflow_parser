@@ -1,12 +1,11 @@
 import json
 import xmltodict
 from pprint import pprint
-from typing import Dict, Any
+from typing import Dict
 from operator_generator import OperatorGenerator
 import re
 import uuid
 from pathlib import Path
-import os
 import argparse
 import shutil
 

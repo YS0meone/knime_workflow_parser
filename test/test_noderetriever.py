@@ -58,20 +58,20 @@ class TestNodeRetriever(unittest.TestCase):
         result  = self.NR.find_node(path)
         self.assertEqual(result, "favorite_count")
     
-    def test_retrieve_node_1(self):
+    def test_retrieve_nodes_1(self):
         aggregations_setting = self.mapping_config["Row Aggregator"]["property_mapping"]["aggregations"]
         nodes = aggregations_setting["nodes"]
         action = aggregations_setting["action"]
-        result = self.NR.retrieve_node(nodes, action)
+        result = self.NR.retrieve_nodes(nodes, action)
         self.assertIsInstance(result, list)
         ans = {"aggFunction": "count", "result attribute": "COUNT", "attribute": "favorite_count"}
         self.assertDictEqual(result[0], ans)
     
-    def test_retrieve_node_2(self):
+    def test_retrieve_nodes_2(self):
         groupby_setting = self.mapping_config["Row Aggregator"]["property_mapping"]["groupByKeys"]
         nodes = groupby_setting["nodes"]
         action = groupby_setting["action"]
-        result = self.NR.retrieve_node(nodes, action)
+        result = self.NR.retrieve_nodes(nodes, action)
         self.assertIsInstance(result, list)
         ans = ["geo_tag.cityID"]
         self.assertListEqual(result, ans)

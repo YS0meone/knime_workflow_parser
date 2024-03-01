@@ -130,3 +130,9 @@ CSV Reader:
         else:
             ret = None
 ```
+## Limitations:
+* Currently the workflow parser can only handle Knime workflow parser, to make it compatible with other platforms requires modifications
+*  Workflow parser cannot handle KNIME's meta nodes which contains sub-workflow inside
+* The number of input output ports of dummy operators are hard coded as three. 
+* Comment conversion is not yet implemented
+ 

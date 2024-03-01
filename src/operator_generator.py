@@ -1,12 +1,8 @@
 import uuid
 import yaml
-from pprint import pprint
-from collections import deque
 import xmltodict
-import os
 from pathlib import Path
 from NodeRetriever import NodeRetriever
-from copy import deepcopy
 
 class OperatorGenerator():
     """
@@ -90,7 +86,7 @@ class OperatorGenerator():
                 # first check if the property is dynamic or not
                 print("Now retrieving", prop)
                 try:
-                    properties[prop] = NR.retrieve_node(
+                    properties[prop] = NR.retrieve_nodes(
                         config["nodes"], config["action"])
                 except ValueError as e:
                     print(f"Error occured while retrieving node: {e}")
