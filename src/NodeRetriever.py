@@ -12,30 +12,29 @@ class NodeRetriever():
     def __init__(self, tree: dict):
         self.tree = tree
 
-    def find_node(self, stops: list[str]) -> str | None:
+    def find_node(self, nodes_path: list[str]) -> str | None:
         """
             Returns the node value in the self.settings
         """
-        # we check before we put the element inside the deque
         # the element inside deque is guaranteed to be dictionary
-        # need to use exception to check for correct path
-        def helper(start: dict, stop: str) -> dict | str | None:
-            q = deque([start])
+        # return None when the path is not correct
+        def helper(node: dict, target_node_key: str) -> dict | str | None:
+            q = deque([node])
             while q:
                 cur = q.popleft()
                 for key in cur.keys():
-                    if key == stop:
+                    if key == target_node_key:
                         return cur[key]
                     else:
                         if isinstance(cur[key], dict):
                             q.append(cur[key])
             return None
-        start = self.tree
-        for stop in stops:
-            if not isinstance(start, dict):
+        cur_node = self.tree
+        for next_node_key in nodes_path:
+            if not isinstance(cur_node, dict):
                 return None
-            start = helper(start, stop)
-        return start
+            cur_node = helper(cur_node, next_node_key)
+        return cur_node
 
     def str2path(self, str_path: str) -> list[str]:
         # convert a string path into a list format

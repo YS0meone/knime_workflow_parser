@@ -3,6 +3,8 @@ import yaml
 import xmltodict
 from pathlib import Path
 from NodeRetriever import NodeRetriever
+from utils import format_dict
+
 
 class OperatorGenerator():
     """
@@ -35,40 +37,17 @@ class OperatorGenerator():
             xml_dict = xmltodict.parse(
                 xml_file.read(), dict_constructor=dict)
         self.settings = {}
-        self.format_dict(xml_dict, self.settings)
+        format_dict(xml_dict, self.settings)
         self.settings = self.settings["settings.xml"]
         # set up the basic template for this particular knime operator type
         self.convert()
 
-    def format_dict(self, xml_dict: dict, ret_dict: dict) -> None:
-        """
-            Further process the parse Knime workflow dictionary to make the keys and values more meaningful
-        """
-        if "entry" in xml_dict:
-            if isinstance(xml_dict["entry"], list):
-                for entry in xml_dict["entry"]:
-                    ret_dict[entry["@key"]] = entry["@value"]
-            else:
-                ret_dict[xml_dict["entry"]["@key"]
-                         ] = xml_dict["entry"]["@value"]
-        if "config" in xml_dict:
-            if isinstance(xml_dict["config"], list):
-                for config in xml_dict["config"]:
-                    ret_dict[config["@key"]] = {}
-                    self.format_dict(config, ret_dict[config["@key"]])
-            else:
-                ret_dict[xml_dict["config"]["@key"]] = {}
-                self.format_dict(xml_dict["config"],
-                                 ret_dict[xml_dict["config"]["@key"]])
-        return
-
     def convert(self) -> None:
         # generate the basic template if we cannot find the mapping we use the template of dummy op
-        # pprint(self._temp)
         if self.knime_operator_type in self.mapping_config:
             self._temp.update(self.mapping_config[self.knime_operator_type]["operator_specs"])
             self._temp["customDisplayName"] = self._temp["operatorType"]
-            # pprint(self._temp)
+
         else:
             self._temp.update(self.mapping_config["Dummy"]["operator_specs"])
             self._temp["customDisplayName"] = self.knime_operator_type
@@ -82,7 +61,6 @@ class OperatorGenerator():
             NR = NodeRetriever(self.settings)
             # loop thru each property and config pair
             for prop, config in prop_map.items():
-                # print(prop, config)
                 # first check if the property is dynamic or not
                 print("Now retrieving", prop)
                 try:
