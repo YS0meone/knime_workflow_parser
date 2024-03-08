@@ -9,7 +9,7 @@ from utils import format_dict
 file_dir = os.path.dirname(__file__)
 sys.path.append(os.path.abspath(os.path.join(file_dir, '..', 'src')))
 
-from NodeRetriever import NodeRetriever
+from node_retriever import NodeRetriever
 
 class TestNodeRetriever(unittest.TestCase):
 

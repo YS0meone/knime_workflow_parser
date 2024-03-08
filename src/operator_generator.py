@@ -2,7 +2,7 @@ import uuid
 import yaml
 import xmltodict
 from pathlib import Path
-from NodeRetriever import NodeRetriever
+from node_retriever import NodeRetriever
 from utils import format_dict
 
 
@@ -31,11 +31,14 @@ class OperatorGenerator():
         mapping_yaml.close()
         self.knime_operator_type = knime_operator_type
         self.node_setting = node_setting
+        self.x = float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["0"])
+        self.y = float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["1"])
         # read the settings xml file and save it as dict
         path = root_path / self.node_setting["node_settings_file"]
         with open(path, 'r') as xml_file:
+            self.source_xml = xml_file.read()
             xml_dict = xmltodict.parse(
-                xml_file.read(), dict_constructor=dict)
+                self.source_xml, dict_constructor=dict)
         self.settings = {}
         format_dict(xml_dict, self.settings)
         self.settings = self.settings["settings.xml"]
@@ -68,6 +71,14 @@ class OperatorGenerator():
                         config["nodes"], config["action"])
                 except ValueError as e:
                     print(f"Error occured while retrieving node: {e}")
+        # we want to store the whole xml file into the dummy prop
+        else:
+            self._temp["operatorProperties"]["dummyPropertyList"] = []
+            dum_prop_list = self._temp["operatorProperties"]["dummyPropertyList"]
+            dum_prop = {}
+            dum_prop["dummyProperty"] = "Source XML"
+            dum_prop["dummyValue"] = self.source_xml
+            dum_prop_list.append(dum_prop)
 
     def get_temp(self) -> dict:
         return self._temp
@@ -79,4 +90,26 @@ class OperatorGenerator():
         return self._temp["operatorID"]
 
     def generate_pos(self) -> dict:
-        return {"x": float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["0"]), "y": float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["1"])}
+        return {"x": self.x, "y": self.y}
+    
+    def generate_comment_box(self, content: str, creator_name: str, creator_id: int, creation_time: str):
+        comment_box = {}
+        comment_box["commentBoxID"] = self.generate_boxid()
+        comment_box["comments"] = []
+        comment_box["comments"].append(self.generate_comment(content, creator_name, creator_id, creation_time))
+        comment_box["commentBoxPosition"] = self.generate_comment_pos()
+        return comment_box
+    
+    def generate_boxid(self):
+        return "commentBox-" + str(uuid.uuid4())
+    
+    def generate_comment(self, content: str, creator_name: str, creator_id: int, creation_time: str):
+        comment = {}
+        comment["content"] = content
+        comment["creatorName"] = creator_name
+        comment["createorID"] = creator_id
+        comment["creationTime"] = creation_time
+        return comment
+
+    def generate_comment_pos(self):
+        return {"x": self.x + 60, "y": self.y + 30}

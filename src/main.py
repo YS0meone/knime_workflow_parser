@@ -120,6 +120,7 @@ def main():
 
     # parsing the operator part
     # The mapping direction: Knime -> Texera
+    tx_dict["commentBoxes"] = []
     for kn_op_setting in kn_ops_setting.values():
         # get the operator type of the knime operator
         kn_op_type = get_knime_operator_type(kn_op_setting["node_settings_file"])
@@ -127,6 +128,15 @@ def main():
         og = OperatorGenerator(kn_op_type, kn_op_setting, root_path, config_path)
         tx_dict["operators"].append(og.get_temp())
         tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
+        
+        temp_website = "https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.reader.CSVTableReaderNodeFactory"
+        temp_time = "2024-03-08T10:36:49.883Z"
+        tx_dict["commentBoxes"].append(og.generate_comment_box(
+            temp_website,
+            "Bot",
+            1,
+            temp_time
+        ))
         k2t_id_mapping[kn_op_setting["id"]] = og.get_id()
 
     # parsing the connection part
