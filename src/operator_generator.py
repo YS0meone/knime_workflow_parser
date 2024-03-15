@@ -4,14 +4,14 @@ import xmltodict
 from pathlib import Path
 from node_retriever import NodeRetriever
 from utils import format_dict
-
+from typing import Dict
 
 class OperatorGenerator():
     """
         OperatorGenerator takes in knime operator type and the dict representation of the operator to create an operator section in the texera workflow. Itrequres a .json file which specify the mapping between the knime operator type and the texera operator template
     """
 
-    def __init__(self, knime_operator_type: str, node_setting: dict, root_path: Path, config_path: Path) -> None:
+    def __init__(self, knime_operator_type: str, node_setting: dict, root_path: Path, config_path: Path, input_ports_setting: Dict[str, int]) -> None:
         # loads the .json as dictionary
         self._temp = {
             "operatorID": "",
@@ -31,6 +31,7 @@ class OperatorGenerator():
         mapping_yaml.close()
         self.knime_operator_type = knime_operator_type
         self.node_setting = node_setting
+        self.input_ports_setting = input_ports_setting
         self.x = float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["0"])
         self.y = float(self.node_setting["ui_settings"]["extrainfo.node.bounds"]["1"])
         # read the settings xml file and save it as dict
@@ -53,6 +54,26 @@ class OperatorGenerator():
 
         else:
             self._temp.update(self.mapping_config["Dummy"]["operator_specs"])
+            # dynamically generate input and output ports
+            input_ports_count = self.input_ports_setting[self.node_setting["id"]]
+            output_ports_count = len(list(self.settings["ports"].values()))
+            self._temp["inputPorts"] = []
+            self._temp["outputPorts"] = []
+            for i in range(input_ports_count):
+                input_port = {
+                    "portID": f"input-{i}",
+                    "displayName": "",
+                    "allowMultiInputs": True,
+                    "isDynamicPort": True
+                }
+                self._temp["inputPorts"].append(input_port)
+            for i in range(output_ports_count):
+                output_port = {
+                    "portID": f"output-{i}",
+                    "displayName": "",
+                    "isDynamicPort": True
+                }
+                self._temp["outputPorts"].append(output_port)
             self._temp["customDisplayName"] = self.knime_operator_type
         # generate the operatorID for the operator
         self._temp["operatorID"] = self.generate_id(self._temp["operatorType"])

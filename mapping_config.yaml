@@ -93,30 +93,6 @@ Row Aggregator:
 Dummy:
   operator_specs:
     operatorType: Dummy
-    inputPorts:
-    - portID: input-0
-      displayName: ''
-      allowMultiInputs: true
-      isDynamicPort: false
-    - portID: input-1
-      displayName: ''
-      allowMultiInputs: false
-      isDynamicPort: true
-    - portID: input-2
-      displayName: ''
-      allowMultiInputs: false
-      isDynamicPort: true
-    outputPorts:
-    - portID: output-0
-      displayName: ''
-      allowMultiInputs: false
-      isDynamicPort: false
-    - portID: output-1
-      displayName: ''
-      isDynamicPort: true
-    - portID: output-2
-      displayName: ''
-      isDynamicPort: true
     showAdvanced: false
     isDisabled: false
     dynamicInputPorts: true

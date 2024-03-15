@@ -1,8 +1,8 @@
 import json
 import xmltodict
-from pprint import pprint
 from typing import Dict
 from operator_generator import OperatorGenerator
+from collections import defaultdict
 import re
 import uuid
 from pathlib import Path
@@ -63,6 +63,17 @@ def get_knime_operator_type(filename: str) -> str:
     return re.sub(pattern, '', filename)
 
 
+def get_input_ports_settting(kn_connection_section: Dict[str, str]) -> Dict[str, int]:
+    """
+        Get the knime connection setting and retrieve the input ports number of each operator
+    """
+    input_ports_setting = defaultdict(int)
+    for connection_setting in kn_connection_section.values():
+        destID = connection_setting["destID"]
+        destPort = int(connection_setting["destPort"])
+        input_ports_setting[destID] = max(input_ports_setting[destID], destPort)
+    return input_ports_setting
+
 def generate_link(mapping: Dict[str, str], connection: dict) -> dict:
     """
         Given the operatorID mappings between knime and texera, and the connection section of knime, create connection element in the texera workflow to generate links
@@ -121,14 +132,15 @@ def main():
     # parsing the operator part
     # The mapping direction: Knime -> Texera
     tx_dict["commentBoxes"] = []
+    # Get the number of input ports
+    input_port_setting = get_input_ports_settting(kn_dict["connections"])
     for kn_op_setting in kn_ops_setting.values():
         # get the operator type of the knime operator
         kn_op_type = get_knime_operator_type(kn_op_setting["node_settings_file"])
         # initialize an operator generator to create operator elements in texera workflow
-        og = OperatorGenerator(kn_op_type, kn_op_setting, root_path, config_path)
+        og = OperatorGenerator(kn_op_type, kn_op_setting, root_path, config_path, input_port_setting)
         tx_dict["operators"].append(og.get_temp())
         tx_dict["operatorPositions"][og.get_id()] = og.generate_pos()
-        
         temp_website = "https://hub.knime.com/knime/extensions/org.knime.features.base/latest/org.knime.base.node.io.filehandling.csv.reader.CSVTableReaderNodeFactory"
         temp_time = "2024-03-08T10:36:49.883Z"
         tx_dict["commentBoxes"].append(og.generate_comment_box(
