@@ -2,3 +2,13 @@ __pycache__/
 .vscode/
 output/
 .metals/
+
+# Knime workflow
+.artifacts/
+data/
+.savedWithData
+.knimelock
+knime.log
+workflow-metadata.xml
+workflow.svg
+workflowset.meta

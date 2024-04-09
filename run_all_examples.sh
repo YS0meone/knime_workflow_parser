@@ -1,6 +1,6 @@
 root=$(pwd)
 config="$root/mapping_config.yaml"
-workflows=("workflow_1" "workflow_2" "workflow_3")
+workflows=("workflow_1" "workflow_2" "workflow_3" "workflow_4" "workflow_5" "workflow_6" "workflow_7")
 
 for workflow in "${workflows[@]}"; do
     input="$root/examples/${workflow}"
