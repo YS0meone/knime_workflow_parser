@@ -1,6 +1,6 @@
 import json
 import xmltodict
-from typing import Dict
+from typing import Dict, Tuple
 from operator_generator import OperatorGenerator
 from collections import defaultdict
 import re
@@ -74,6 +74,27 @@ def get_input_ports_settting(kn_connection_section: Dict[str, str]) -> Dict[str,
         input_ports_setting[destID] = max(input_ports_setting[destID], destPort)
     return input_ports_setting
 
+
+def set_link_source(template: dict, operator_id: str, port_id: int) -> None:
+    template["source"]["operatorID"] = operator_id
+    # check if it is dummy
+    # the complexity of setting ports is caused by the control variable port of Knime ops
+    if operator_id.startswith("Dummy"):
+        template["source"]["portID"] = "output-" + str(port_id)
+    else:
+        template["source"]["portID"] = "output-" + str(port_id - 1)
+
+
+def set_link_target(template: dict, operator_id: str, port_id: int) -> None:
+    template["target"]["operatorID"] = operator_id
+    # check if it is dummy
+    # the complexity of setting ports is caused by the control variable port of Knime ops
+    if operator_id.startswith("Dummy"):
+        template["target"]["portID"] = "input-" + str(port_id)
+    else:
+        template["target"]["portID"] = "input-" + str(port_id - 1)
+
+
 def generate_link(mapping: Dict[str, str], connection: dict) -> dict:
     """
         Given the operatorID mappings between knime and texera, and the connection section of knime, create connection element in the texera workflow to generate links
@@ -101,25 +122,21 @@ def generate_link(mapping: Dict[str, str], connection: dict) -> dict:
         while isinstance(preimage[0], dict):
             sourcePort = int(preimage[1])
             preimage = preimage[0]["output"][sourcePort]
-        template["source"]["operatorID"] = preimage[0]
-        template["source"]["portID"] = "output-" + str(int(preimage[1]) - 1)
+        set_link_source(template, preimage[0], preimage[1])
     else:
-        template["source"]["operatorID"] = mapping[sourceID]
-        template["source"]["portID"] = "output-" + str(sourcePort - 1)
+        set_link_source(template, mapping[sourceID], sourcePort)
     if isinstance(mapping[destID], dict):
         preimage = mapping[destID]["input"][destPort]
         while isinstance(preimage[0], dict):
             sourcePort = int(preimage[1])
             preimage = preimage[0]["input"][destPort]
-        template["target"]["operatorID"] = preimage[0]
-        template["target"]["portID"] = "input-" + str(int(preimage[1]) - 1)
+        set_link_target(template, preimage[0], preimage[1])
     else:
-        template["target"]["operatorID"] = mapping[destID]
-        template["target"]["portID"] = "input-" + str(destPort - 1)
+        set_link_target(template, mapping[destID], destPort)
     return template
 
 
-def get_knime_workflow(root_path: Path, knime_workflow: dict):
+def get_knime_workflow(root_path: Path, knime_workflow: dict) -> None:
     """
         This function takes in the directory of the Knime workflow, locates and converts the workflow.knime into xml
         file. Then it dumps the xml file as a Python dictionary and formats it.
@@ -141,6 +158,22 @@ def get_knime_workflow(root_path: Path, knime_workflow: dict):
     format_dict(xml_workflow, knime_workflow)
 
 
+def is_inside_component(root_path: Path) -> bool:
+    component_metadata = root_path / "component-metadata.xml"
+    return component_metadata.exists()
+
+
+def retrieve_component_port_id(root_path: Path) -> Tuple[str, str]:
+    component_setting_file = root_path / "settings.xml"
+    if component_setting_file.exists():
+        with open(component_setting_file, 'r', encoding="utf-8") as xml_file:
+            setting_dict = xmltodict.parse(
+                xml_file.read(), dict_constructor=dict)
+        formatted_setting = {}
+        format_dict(setting_dict, formatted_setting)
+        return formatted_setting["settings.xml"]["virtual-in-ID"], formatted_setting["settings.xml"]["virtual-out-ID"]
+
+
 def parsing_workflow(root_path: Path, config_path: Path, texera_workflow: dict, k2t_id_mapping: dict) -> dict:
     """
         This is the recursive workflow parsing function. It would parse and convert each Knime node into
@@ -156,6 +189,10 @@ def parsing_workflow(root_path: Path, config_path: Path, texera_workflow: dict, 
     # parsing the operator part
     # Get the number of input ports
     input_port_setting = get_input_ports_settting(knime_workflow["connections"])
+    component_in_id = "-2"
+    component_out_id = "-2"
+    if is_inside_component(root_path):
+        component_in_id, component_out_id = retrieve_component_port_id(root_path)
     for kn_op_setting in knime_operator_settings.values():
         # check if the node type is metanode
         if kn_op_setting["node_is_meta"] == "true":
@@ -169,16 +206,11 @@ def parsing_workflow(root_path: Path, config_path: Path, texera_workflow: dict, 
                 k2t_id_mapping
                 )
             k2t_id_mapping[kn_op_setting["id"]] = port2ID
-            # portID is 0 based only for metanode correct it here
-            connections = knime_workflow["connections"]
-            for connection in connections.values():
-                if connection["sourceID"] == kn_op_setting["id"]:
-                    old_port_id = int(connection["sourcePort"])
-                    connection["sourcePort"] = str(old_port_id + 1)
-                if connection["destID"] == kn_op_setting["id"]:
-                    old_port_id = int(connection["destPort"])
-                    connection["destPort"] = str(old_port_id + 1)
             continue
+        # check if the node is component virtual node
+        if is_inside_component(root_path):
+            if kn_op_setting["id"] == component_in_id or kn_op_setting["id"] == component_out_id:
+                continue
         # get the operator type of the knime operator
         kn_op_type = get_knime_operator_type(kn_op_setting["node_settings_file"])
         # initialize an operator generator to create operator elements in texera workflow
@@ -200,15 +232,27 @@ def parsing_workflow(root_path: Path, config_path: Path, texera_workflow: dict, 
     port2ID = {"input": {}, "output": {}}
     connections = knime_workflow["connections"]
     for connection in connections.values():
-        # check if it the destID is representing the output port of metanode
+        # check if the connection is between component virtual node
+        if is_inside_component(root_path):
+            if connection["sourceID"] == component_in_id:
+                operator_id = k2t_id_mapping[connection["destID"]]
+                port = int(connection["sourcePort"])
+                port2ID["input"][port] = operator_id, connection["destPort"]
+                continue
+            if connection["destID"] == component_out_id:
+                operator_id = k2t_id_mapping[connection["sourceID"]]
+                port = int(connection["destPort"])
+                port2ID["output"][port] = operator_id, connection["sourcePort"]
+                continue
+        # check if it the destID or sourceID is representing the port of metanode
         if connection["sourceID"] == "-1":
             operator_id = k2t_id_mapping[connection["destID"]]
-            port = int(connection["sourcePort"]) + 1
+            port = int(connection["sourcePort"])
             port2ID["input"][port] = operator_id, connection["destPort"]
             continue
         if connection["destID"] == "-1":
             operator_id = k2t_id_mapping[connection["sourceID"]]
-            port = int(connection["destPort"]) + 1
+            port = int(connection["destPort"])
             port2ID["output"][port] = operator_id, connection["sourcePort"]
             continue
         texera_workflow["links"].append(generate_link(k2t_id_mapping, connection))

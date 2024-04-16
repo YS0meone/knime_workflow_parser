@@ -55,8 +55,9 @@ class OperatorGenerator():
         else:
             self._temp.update(self.mapping_config["Dummy"]["operator_specs"])
             # dynamically generate input and output ports
-            input_ports_count = self.input_ports_setting[self.node_setting["id"]]
-            output_ports_count = len(list(self.settings["ports"].values()))
+            # we need to increment by 1 so that the control variable port is counted
+            input_ports_count = self.input_ports_setting[self.node_setting["id"]] + 1
+            output_ports_count = len(list(self.settings["ports"].values())) + 1
             self._temp["inputPorts"] = []
             self._temp["outputPorts"] = []
             for i in range(input_ports_count):

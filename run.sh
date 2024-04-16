@@ -1,6 +1,6 @@
 root=$(pwd)
 config="$root/mapping_config.yaml"
-workflow="Finding Association Rules for Market Basket Analysis"
+workflow="workflow_7"
 
 input="$root/examples/${workflow}"
 output="$root/output/converted_${workflow}.json"
