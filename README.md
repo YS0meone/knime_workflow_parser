@@ -2,7 +2,7 @@
 ## About the project
 The project parses workflow metadata from other ML platforms into a read-only Texera workflow. Currently the code can only handle the Knime workflow metadata. The parser is capable of perserving the topological structure of the workflow and converting each operator's property between two platforms if such mapping relationship exists.
 
-The parser stores all of the mapping information in the `mapping_config.yaml`. So far only two operators in Knime are specified: CSV Reader and Row Aggregator. All other operators would be converted to a dummy operator. As a placeholder in the workflow. By modifying the `mapping_config.yaml`, we can add more mapping relationship between the operators.
+The parser stores all of the mapping information in the `mapping_config.yaml`. So far only two operators in Knime are specified: CSV Reader and Row Aggregator. All other operators would be converted to a dummy operator as a placeholder in the workflow. By modifying the `mapping_config.yaml`, we can add more mapping relationship between the operators.
 
 ![Before Parsing](https://drive.google.com/uc?export=view&id=1LPGWyVk0HHzF9yG-acMJyXJtPyxtbu5N "Before Parsing")
 
@@ -36,7 +36,7 @@ To deactivate the virtual environment, type `deactivate`
 The result would be a json file called `converted_<your_workflow_name>.json`. You can find it in the output folder. To view it, simply import the json file in Texera.
 
 ## Steps to Convert New Workflows
-1. Store the Knime workflow folder inside the ./example/ directory (You can find the workflow folder in your Knime workspace directory)
+1. Store the Knime workflow folder inside the ./example/ directory (You can find the workflow folder in your Knime workspace directory.)
 2. Modify the run_all_examples.sh (shown below). You should add the name of your new workflow in the workflows variable. 
 ```bash
 root=$(pwd)
@@ -57,13 +57,13 @@ done
 
 echo "All workflows completed successfully."
 ```
-3. Run the shell script from the workflow folder `./run.sh`
+3. Run the shell script from the workflow folder `./run.sh`.
 
 Again the `workflow.json` file would be generated in the workflow folder.
 
 ## Steps to Run Unit Tests
-1. Navigate to the test foler
-2. Run `python test_noderetriever.py`
+1. Navigate to the test folder.
+2. Run `python test_noderetriever.py`.
 
 ## Steps to Add more Operator Mappings
 The mapping relationship is stored in the `mapping_config.yaml` file. The following is an example of a mapping entity. Each entity starts with the name of the Knime's operator and has two foundamental parts: `operator_specs` and `property_mapping`.
@@ -131,8 +131,8 @@ CSV Reader:
             ret = None
 ```
 ## Limitations:
-* Currently the workflow parser can only handle Knime workflow parser, to make it compatible with other platforms requires modifications
-*  Workflow parser cannot handle KNIME's meta nodes which contains sub-workflow inside
+* Currently the workflow parser can only handle Knime workflow parser; to make it compatible with other platforms requires modifications.
+*  Workflow parser cannot handle KNIME's meta nodes which contains sub-workflow inside.
 * The number of input output ports of dummy operators are hard coded as three. 
-* Comment conversion is not yet implemented
-* Only two operators: CSV Reader and Row Aggregator are fully configured for workflow conversion. Other opoerators would all gets mapped to dummy operator
+* Comment conversion is not yet implemented.
+* Only two operators: CSV Reader and Row Aggregator are fully configured for workflow conversion. Other opoerators would all gets mapped to dummy operator.
