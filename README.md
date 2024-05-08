@@ -132,7 +132,8 @@ CSV Reader:
 ```
 ## Limitations:
 * Currently the workflow parser can only handle Knime workflow parser, to make it compatible with other platforms requires modifications
-*  Workflow parser cannot handle KNIME's meta nodes which contains sub-workflow inside
-* The number of input output ports of dummy operators are hard coded as three. 
+* The comment box in the converted workflow should store the link to the operator's manual instead of a hard coded placeholder
 * Comment conversion is not yet implemented
+* Might fail for workflows that contains metanode but does not have the component-metadata.xml file
 * Only two operators: CSV Reader and Row Aggregator are fully configured for workflow conversion. Other opoerators would all gets mapped to dummy operator
+* The property configuration is static. Say you got a operator with a property that can have multiple entries. (e.g. the aggFunction of Row Aggregator) You need to specify the nodes location for all of the entries in the property tree.

@@ -77,7 +77,7 @@ Row Aggregator:
           attribute: /model/frequencyColumns/selected_Internals/0
       action: |
         ret = []
-        for i in range(0, len($nodes)):
+        for i in range(len($nodes)):
             group = {}
             group["aggFunction"] = $nodes[i]["aggFunction"].lower()
             group["result attribute"] = $nodes[i]["result_attribute"]

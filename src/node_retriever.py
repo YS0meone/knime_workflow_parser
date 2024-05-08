@@ -47,19 +47,19 @@ class NodeRetriever():
             if isinstance(nodes, dict):
                 for var, path in nodes.items():
                     # store all needed local variables
-                    ret = self.find_node(self.str2path(path))
-                    if ret is None:
+                    node_val = self.find_node(self.str2path(path))
+                    if node_val is None:
                         raise ValueError("The node path in the mapping configuration is wrong!")
-                    locals()[var] = ret
+                    locals()[var] = node_val
             elif isinstance(nodes, list):
                 for i in range(len(nodes)):
                     if not isinstance(nodes[i], dict):
                         raise TypeError("Nodes should be a list of dict or dict!")
                     for var, path in nodes[i].items():
-                        ret = self.find_node(self.str2path(path))
-                        if ret is None:
+                        node_val = self.find_node(self.str2path(path))
+                        if node_val is None:
                             raise ValueError("The node path in the mapping configuration is wrong!")
-                        nodes[i][var] = ret
+                        nodes[i][var] = node_val
             else:
                 raise TypeError("Nodes should be a list of dict or dict!")
         except TypeError as t:

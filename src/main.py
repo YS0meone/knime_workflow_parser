@@ -63,7 +63,7 @@ def get_knime_operator_type(filename: str) -> str:
     return re.sub(pattern, '', filename)
 
 
-def get_input_ports_settting(kn_connection_section: Dict[str, str]) -> Dict[str, int]:
+def get_input_ports_setting(kn_connection_section: Dict[str, str]) -> Dict[str, int]:
     """
         Get the knime connection setting and retrieve the input ports number of each operator
     """
@@ -188,7 +188,7 @@ def parsing_workflow(root_path: Path, config_path: Path, texera_workflow: dict, 
     knime_operator_settings = knime_workflow["nodes"]
     # parsing the operator part
     # Get the number of input ports
-    input_port_setting = get_input_ports_settting(knime_workflow["connections"])
+    input_port_setting = get_input_ports_setting(knime_workflow["connections"])
     component_in_id = "-2"
     component_out_id = "-2"
     if is_inside_component(root_path):

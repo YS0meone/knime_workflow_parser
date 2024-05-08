@@ -1,10 +1,10 @@
+from utils import format_dict
 import unittest
 import os
 import sys
 import xmltodict
 import yaml
-from pprint import pprint
-from utils import format_dict
+
 
 file_dir = os.path.dirname(__file__)
 sys.path.append(os.path.abspath(os.path.join(file_dir, '..', 'src')))
@@ -33,40 +33,41 @@ class TestNodeRetriever(unittest.TestCase):
         result2 = self.NR.find_node(path2)
         self.assertEqual(result1, result2)
         self.assertEqual(result1, "false")
-        
+
     def test_find_node_1(self):
         path = "/.../isInverted"
         path = self.NR.str2path(path)
-        result  = self.NR.find_node(path)
+        result = self.NR.find_node(path)
         self.assertEqual(result, "false")
-    
+
     def test_find_node_2(self):
         path = "/model/frequencyColumns/selected_Internals/0"
         path = self.NR.str2path(path)
-        result  = self.NR.find_node(path)
+        result = self.NR.find_node(path)
         self.assertEqual(result, "favorite_count")
 
     def test_find_node_3(self):
         path = "/foo/blah"
         path = self.NR.str2path(path)
-        result  = self.NR.find_node(path)
+        result = self.NR.find_node(path)
         self.assertIsNone(result)
-    
+
     def test_find_node_4(self):
         path = "/model/frequencyColumns/manualFilter/0"
         path = self.NR.str2path(path)
-        result  = self.NR.find_node(path)
+        result = self.NR.find_node(path)
         self.assertEqual(result, "favorite_count")
-    
+
     def test_retrieve_nodes_1(self):
         aggregations_setting = self.mapping_config["Row Aggregator"]["property_mapping"]["aggregations"]
         nodes = aggregations_setting["nodes"]
         action = aggregations_setting["action"]
         result = self.NR.retrieve_nodes(nodes, action)
+        print(result)
         self.assertIsInstance(result, list)
         ans = {"aggFunction": "count", "result attribute": "COUNT", "attribute": "favorite_count"}
         self.assertDictEqual(result[0], ans)
-    
+
     def test_retrieve_nodes_2(self):
         groupby_setting = self.mapping_config["Row Aggregator"]["property_mapping"]["groupByKeys"]
         nodes = groupby_setting["nodes"]
@@ -76,6 +77,6 @@ class TestNodeRetriever(unittest.TestCase):
         ans = ["geo_tag.cityID"]
         self.assertListEqual(result, ans)
 
-        
+
 if __name__ == "__main__":
     unittest.main()

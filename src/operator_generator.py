@@ -86,7 +86,6 @@ class OperatorGenerator():
             NR = NodeRetriever(self.settings)
             # loop thru each property and config pair
             for prop, config in prop_map.items():
-                # first check if the property is dynamic or not
                 print("Now retrieving", prop)
                 try:
                     properties[prop] = NR.retrieve_nodes(
